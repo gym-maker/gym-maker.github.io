@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 Holiday Shipping Deadlines (USPS, UPS, FedEx)</title>
+<meta name="description" content="Official 2026 USPS, UPS, and FedEx last days to ship for Christmas. Live countdown and a sortable table of services. UPS and FedEx dates are for arrival by December 24 — they do not deliver on December 25. No past-year estimates.">
+<link rel="canonical" href="https://gym-maker.github.io/holiday-shipping-deadlines/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#F5F0E8">
+<meta property="og:type" content="website"><meta property="og:locale" content="en_US">
+<meta property="og:title" content="2026 Holiday Shipping Deadlines (USPS, UPS, FedEx)">
+<meta property="og:description" content="Official last days to ship for Christmas 2026, with a live countdown. UPS and FedEx tables are for December 24 arrival. No past-year estimates.">
+<meta property="og:url" content="https://gym-maker.github.io/holiday-shipping-deadlines/">
+<meta property="og:image" content="https://gym-maker.github.io/holiday-shipping-deadlines/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/tools.css">
+<style>
+th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
+th.sortable:hover{color:var(--ink)}
+#resultCard .big{margin:0 0 6px}
+#tableWrap{overflow-x:auto}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"When is the last day to ship for Christmas 2026?","acceptedAnswer":{"@type":"Answer","text":"It depends on the carrier, service, and destination. USPS publishes recommended send-by dates for expected delivery before December 25 (for example, Thursday, December 17 for Ground Advantage and First-Class Mail in the contiguous U.S.). UPS and FedEx do not deliver on December 25; their official last-day tables are for scheduled arrival by December 24."}},
+{"@type":"Question","name":"Why aren’t the UPS and FedEx dates for December 25 delivery?","acceptedAnswer":{"@type":"Answer","text":"Both carriers are closed on December 25, 2026, with no pickup or delivery. Their official 2026 holiday tables list last days to ship for arrival by December 24. This page does not relabel those dates as Christmas Day delivery."}},
+{"@type":"Question","name":"Are these dates a delivery guarantee?","acceptedAnswer":{"@type":"Answer","text":"No. USPS describes its dates as recommended send-by dates for expected delivery before December 25; actual delivery may vary. UPS and FedEx dates can also depend on the origin, destination, and drop-off cutoff, and they note that certain destinations may need an earlier ship date. Always confirm on the carrier’s official page."}},
+{"@type":"Question","name":"What if a service has no single published date?","acceptedAnswer":{"@type":"Answer","text":"This page shows “Not a single published date” and links to the carrier’s official lookup (for example, USPS service commitments, ups.com/ctc, or the FedEx Ground map). It does not estimate a date from a prior year. If a carrier had not published 2026 dates at all, the page would show “Not published yet” with the official link."}}
+]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<h1>2026 Holiday Shipping Deadlines</h1>
+<p class="lead">Pick a carrier, destination, and service to see the official last day to ship, with a live countdown from today (U.S. Eastern Time). USPS dates are <b>recommended send-by dates for expected delivery before Friday, December 25</b> — not a guarantee. UPS and FedEx <b>do not deliver on December 25</b>; their official tables are last days to ship for <b>scheduled arrival by December 24</b>. Only official 2026 pages are used. If a carrier or service has no single published date, this page says so and links to the official source — it does not estimate from past years.</p>
+</header>
+
+<section class="card">
+<div class="stats">
+<div class="stat"><b>USPS</b><span>Before Dec 25 (recommended)</span></div>
+<div class="stat"><b>UPS</b><span>By Dec 24 (closed Christmas)</span></div>
+<div class="stat"><b>FedEx</b><span>By Dec 24 (closed Christmas)</span></div>
+<div class="stat"><b>Dec 25</b><span>Friday, Christmas Day 2026</span></div>
+</div>
+</section>
+
+<section class="card">
+<h2>Look up a deadline</h2>
+<div class="three">
+<div>
+<label class="f" for="carrier">Carrier</label>
+<select id="carrier">
+<option value="usps">USPS</option>
+<option value="ups">UPS</option>
+<option value="fedex">FedEx</option>
+</select>
+</div>
+<div>
+<label class="f" for="destination">Destination</label>
+<select id="destination"></select>
+</div>
+<div>
+<label class="f" for="service">Service</label>
+<select id="service"></select>
+</div>
+</div>
+<div class="result" id="resultCard" style="margin-top:16px"></div>
+</section>
+
+<section class="card">
+<h2>All published services</h2>
+<p class="note">The table follows the carrier and destination you picked. Click a column header to sort. Rows without a single published date stay at the end when you sort by last day to ship.</p>
+<div class="row noprint" style="margin-bottom:10px">
+<button type="button" class="btn ghost" id="showAll">Show every carrier</button>
+</div>
+<div id="tableWrap"></div>
+</section>
+
+<section class="card">
+<h2>Official sources (checked 2026-11-16)</h2>
+<ul id="sources"></ul>
+<p class="note">USPS Postal Bulletin 22714 lists “Tuesday, Dec. 9” in one military-mail line; December 9, 2026 is a Wednesday, which is what the USPS holiday dates page uses. The holiday dates page also lists two different ZIP 340 rows; those conflicts are flagged in the table. The UPS and FedEx PDFs are the carriers’ official 2026 last-day charts.</p>
+</section>
+
+<section class="card faq">
+<h2>Frequently asked questions</h2>
+<details open>
+<summary>When is the last day to ship for Christmas 2026?</summary>
+<p>It depends on the carrier, service, and destination. For the contiguous U.S., USPS recommends Thursday, December 17 for Ground Advantage and First-Class Mail, Friday, December 18 for Priority Mail, and Saturday, December 19 for Priority Mail Express, for expected delivery <em>before</em> December 25. UPS and FedEx last-day tables are for arrival by December 24, because they are closed on Christmas Day.</p>
+</details>
+<details>
+<summary>Why aren’t the UPS and FedEx dates for December 25 delivery?</summary>
+<p>Both carriers say they are closed on December 25, with no pickup or delivery. Their official 2026 tables list last days to ship for scheduled arrival by December 24. This page does not relabel those dates as Christmas Day delivery.</p>
+</details>
+<details>
+<summary>Are these dates a delivery guarantee?</summary>
+<p>No. USPS calls them recommended send-by dates; actual delivery may vary with origin, destination, and acceptance time. UPS notes that certain destinations may need an earlier ship date. FedEx Ground and Home Delivery last days depend on the transit time for your ZIP Codes. Dates can change — check the official pages before you ship.</p>
+</details>
+<details>
+<summary>What if there is no single published date?</summary>
+<p>This page shows “Not a single published date” (or “Not published yet” if a carrier had no 2026 table) and links to the official lookup. It never fills in a date from a previous year.</p>
+</details>
+</section>
+
+<footer class="foot">
+<p><b>Note:</b> This is a reading of the carriers’ official 2026 holiday deadline pages, checked 2026-11-16. It is not a delivery guarantee, shipping advice, or a substitute for the carrier’s current cutoff at your post office, drop-off location, or scheduled pickup. Made with AI help.</p>
+<p>Made with AI help · <a href="../">Free tools from Send This Instead</a> · <a href="../black-friday-calculator/">Black Friday calculator</a> · <a href="../2027-calendar/">2027 US holiday calendar</a></p>
+<p class="note noprint tool-cta">If you write work emails in English, there is a free 5-template sample you can download: <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=holiday-shipping-deadlines" target="_blank" rel="noopener">Send This Instead — free sample</a></p>
+<img class="px" src="https://hits.sh/gym-maker.github.io/holiday-shipping-deadlines.svg" alt="" aria-hidden="true">
+</footer>
+</div>
+<script src="holiday-shipping.js"></script>
+<script>
+(function(){
+  var H = window.HolidayShipping;
+  function $(id){ return document.getElementById(id); }
+  function esc(s){
+    return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  var sortState = { key: 'shipBy', dir: 'asc' };
+  var showAll = false;
+
+  function fillDest(){
+    var carrier = $('carrier').value;
+    var dests = H.DESTINATIONS[carrier] || [];
+    var prev = $('destination').value;
+    $('destination').innerHTML = dests.map(function(d){
+      return '<option value="'+esc(d.id)+'">'+esc(d.label)+'</option>';
+    }).join('');
+    if (dests.some(function(d){ return d.id === prev; })) $('destination').value = prev;
+    fillService();
+  }
+  function fillService(){
+    var rows = H.listServices({ carrier: $('carrier').value, destination: $('destination').value });
+    var prev = $('service').value;
+    $('service').innerHTML = rows.map(function(s){
+      return '<option value="'+esc(s.id)+'">'+esc(s.service)+'</option>';
+    }).join('');
+    if (rows.some(function(s){ return s.id === prev; })) $('service').value = prev;
+    render();
+  }
+  function todayISO(){
+    return H.todayInTimeZone(new Date(), H.TZ);
+  }
+  function resultHTML(s, today){
+    if (!s) return '<p class="note">Pick a service.</p>';
+    var html = '<p class="note">'+esc(s.service)+' · '+esc(s.destinationLabel)+'</p>';
+    html += '<p class="big">'+esc(H.shipByLabel(s))+'</p>';
+    html += '<p>'+esc(H.deliveryTargetLabel(s.deliveryTarget))+'</p>';
+    if (s.shipBy) {
+      var c = H.countdown(s.shipBy, today);
+      var cls = c.state === 'passed' ? 'bad' : (c.state === 'today' ? 'ok' : 'ok');
+      html += '<p class="'+cls+'">'+esc(c.label)+'</p>';
+      html += '<p class="note">Counted from '+esc(H.formatLongDate(today))+' in U.S. Eastern Time.</p>';
+    } else {
+      var c = H.countdown(null, today);
+      html += '<p class="note">'+esc(c.label)+'</p>';
+    }
+    if (s.notes) html += '<p class="note">'+esc(s.notes)+'</p>';
+    if (s.lookupUrl) html += '<p><a href="'+esc(s.lookupUrl)+'" target="_blank" rel="noopener">Official lookup</a></p>';
+    var src = H.SOURCES.filter(function(x){ return x.carrier === s.carrier; })[0];
+    if (src) html += '<p class="note">Source: <a href="'+esc(src.url)+'" target="_blank" rel="noopener">'+esc(src.title)+'</a> (checked '+esc(src.checked)+')</p>';
+    return html;
+  }
+  function tableHTML(rows, today){
+    var sorted = H.sortServices(rows, sortState.key, sortState.dir);
+    function mark(key, label){
+      var arrow = sortState.key === key ? (sortState.dir === 'asc' ? ' ↑' : ' ↓') : '';
+      return '<th class="sortable" data-key="'+key+'">'+label+arrow+'</th>';
+    }
+    var html = '<table><thead><tr>';
+    html += mark('carrier','Carrier')+mark('service','Service')+mark('destination','Destination')+mark('shipBy','Last day to ship')+'<th>Days left</th><th>Delivery target</th>';
+    html += '</tr></thead><tbody>';
+    sorted.forEach(function(s){
+      var days = '—';
+      if (s.shipBy) {
+        var c = H.countdown(s.shipBy, today);
+        days = c.label;
+        if (c.state === 'passed') days = '<span class="bad">'+esc(c.label)+'</span>';
+        else days = esc(c.label);
+      } else {
+        days = esc(H.shipByLabel(s));
+      }
+      var target = s.deliveryTarget === 'by-dec-24' ? 'By Dec 24 (closed Dec 25)' : 'Before Dec 25 (recommended)';
+      html += '<tr>';
+      html += '<td>'+esc(s.carrier.toUpperCase())+'</td>';
+      html += '<td>'+esc(s.service)+'</td>';
+      html += '<td>'+esc(s.destinationLabel)+'</td>';
+      html += '<td>'+esc(H.shipByLabel(s))+'</td>';
+      html += '<td>'+days+'</td>';
+      html += '<td>'+esc(target)+'</td>';
+      html += '</tr>';
+    });
+    html += '</tbody></table>';
+    return html;
+  }
+  function render(){
+    var today = todayISO();
+    var s = H.getService($('service').value);
+    $('resultCard').innerHTML = resultHTML(s, today);
+    var rows = showAll ? H.listServices({}) : H.listServices({ carrier: $('carrier').value, destination: $('destination').value });
+    $('tableWrap').innerHTML = tableHTML(rows, today);
+    $('tableWrap').querySelectorAll('th.sortable').forEach(function(th){
+      th.addEventListener('click', function(){
+        var key = th.getAttribute('data-key');
+        if (sortState.key === key) sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
+        else { sortState.key = key; sortState.dir = 'asc'; }
+        render();
+      });
+    });
+  }
+  $('sources').innerHTML = H.SOURCES.map(function(s){
+    return '<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.title)+'</a> — checked '+esc(s.checked)+'</li>';
+  }).join('');
+  $('carrier').addEventListener('change', function(){ showAll = false; fillDest(); });
+  $('destination').addEventListener('change', fillService);
+  $('service').addEventListener('change', render);
+  $('showAll').addEventListener('click', function(){ showAll = true; render(); });
+  fillDest();
+  setInterval(render, 60000);
+})();
+</script>
+</body>
+</html>
