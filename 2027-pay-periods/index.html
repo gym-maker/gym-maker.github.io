@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2027 Pay Period Calendar — 26 or 27 Biweekly Paychecks?</title>
+<meta name="description" content="Free 2027 US pay period calendar for weekly, biweekly, semi-monthly, and monthly schedules. See whether you get 26 or 27 biweekly paychecks, which months have an extra payday, and which dates move when a payday lands on a weekend or a Federal Reserve Bank holiday.">
+<link rel="canonical" href="https://gym-maker.github.io/2027-pay-periods/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#F5F0E8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2027 Pay Period Calendar — 26 or 27 Biweekly Paychecks?">
+<meta property="og:description" content="Pick your payday cycle. See 26 vs 27 paychecks, 3-paycheck months, and dates moved off Federal Reserve Bank holidays — not OPM office closings.">
+<meta property="og:url" content="https://gym-maker.github.io/2027-pay-periods/">
+<meta property="og:image" content="https://gym-maker.github.io/2027-pay-periods/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/tools.css">
+<style>
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
+.pay{background:var(--pine-soft);color:var(--pine);font-weight:700}
+.pay.moved{background:var(--red-soft);color:var(--red)}
+.muted-row td{color:var(--mute)}
+.legend i.pay{background:var(--pine-soft)}
+.legend i.moved{background:var(--red-soft)}
+@media print{
+  .noprint,footer.foot,.card.faq{display:none!important}
+  .wrap{max-width:none;padding:0}
+  .months{grid-template-columns:repeat(3,1fr);gap:6px}
+  .month{border-color:#999;padding:4px}
+  .grid .d{padding:1px 0}
+  h1{font-size:16px}
+  .lead{display:none}
+  @page{size:A4 portrait;margin:8mm}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How many biweekly paychecks are there in 2027?","acceptedAnswer":{"@type":"Answer","text":"Most biweekly cycles have 26 paydays in 2027. The exception is a Friday cycle whose first 2027 payday is Friday, January 1: that cycle has 27 scheduled Fridays, the last on Friday, December 31. January 1 is New Year's Day, and Federal Reserve Banks are closed, so if your employer pays the previous business day, that check is dated Thursday, December 31, 2026, and 26 checks are paid in 2027. December 31, 2027 stays put because Federal Reserve Banks are open that Friday (New Year's Day 2028 is a Saturday)."}},
+{"@type":"Question","name":"Which months have three biweekly paychecks in 2027?","acceptedAnswer":{"@type":"Answer","text":"On the Friday cycle starting January 1, the scheduled three-paycheck months are January, July, and December. If the January 1 check is paid on December 31, 2026, the paid three-paycheck months are July (July 2, 16, 30) and December (December 3, 17, 31). On the Friday cycle starting January 8, April (April 2, 16, 30) and October (October 1, 15, 29) each have three paychecks."}},
+{"@type":"Question","name":"Do paydays move for Juneteenth, Christmas, or New Year's Eve in 2027?","acceptedAnswer":{"@type":"Answer","text":"Federal Reserve Banks stay open on Friday, June 18, Friday, December 24, and Friday, December 31, 2027, even though the Board of Governors is closed and most federal employees observe those Fridays off. A payday dated on those Fridays does not need to move for bank settlement. January 1, 2027 is a Friday and Federal Reserve Banks are closed, so a payday due that day is commonly paid Thursday, December 31, 2026."}},
+{"@type":"Question","name":"Is this the official federal employee pay calendar?","acceptedAnswer":{"@type":"Answer","text":"No. Federal employees should use the official calendar from their payroll provider, such as NFC, GSA, or DFAS. This page is a planning calendar for private-employer cycles. Your employer's dates win."}}
+]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<h1>2027 Pay Period Calendar</h1>
+<p class="lead">See every payday on your cycle, whether 2027 is a 26- or 27-paycheck year, which months have an extra check, and which dates move when a payday lands on a weekend or a <b>Federal Reserve Bank</b> holiday — not an OPM office closing.</p>
+</header>
+
+<section class="card noprint">
+<label class="f" for="freq">Pay frequency</label>
+<select id="freq">
+<option value="biweekly" selected>Biweekly (every 2 weeks)</option>
+<option value="weekly">Weekly</option>
+<option value="semi-15-eom">Semi-monthly (15th and last day)</option>
+<option value="semi-1-15">Semi-monthly (1st and 15th)</option>
+<option value="monthly">Monthly</option>
+</select>
+
+<div id="stepWrap">
+<label class="f" for="weekday">Payday weekday</label>
+<select id="weekday">
+<option value="1">Monday</option>
+<option value="2">Tuesday</option>
+<option value="3">Wednesday</option>
+<option value="4">Thursday</option>
+<option value="5" selected>Friday</option>
+</select>
+<label class="f" for="cycle">First payday in 2027</label>
+<select id="cycle"></select>
+<p class="note" style="margin:6px 0 0">Or enter any payday you already know, and the rest of the cycle is filled in.</p>
+<label class="f" for="known">A payday I already know</label>
+<input id="known" type="date" value="">
+</div>
+
+<div id="monthWrap" hidden>
+<label class="f" for="monthDay">Day of the month</label>
+<select id="monthDay">
+<option value="last" selected>Last day of the month</option>
+<option value="1">1st</option>
+<option value="15">15th</option>
+<option value="28">28th</option>
+<option value="31">31st (last day in shorter months)</option>
+</select>
+</div>
+
+<label class="f" style="display:flex;align-items:flex-start;gap:8px;font-weight:600;margin-top:14px">
+<input id="shift" type="checkbox" checked style="width:auto;margin-top:4px">
+<span>Move paydays that fall on a weekend or a Federal Reserve Bank holiday to the previous business day. This is a common employer practice, not a federal law.</span>
+</label>
+
+<div class="presets noprint">
+<button type="button" class="btn ghost" data-preset="fri-1">Friday cycle starting Jan 1</button>
+<button type="button" class="btn ghost" data-preset="fri-8">Friday cycle starting Jan 8</button>
+<button type="button" class="btn ghost" data-preset="semi-eom">15th and last day</button>
+<button type="button" class="btn ghost" data-preset="semi-1">1st and 15th</button>
+</div>
+<div class="row noprint">
+<button type="button" class="btn" onclick="window.print()">Print this calendar</button>
+</div>
+</section>
+
+<section class="card">
+<div class="stats" id="stats"></div>
+<p class="result" id="headline" style="margin:12px 0 0"></p>
+<p class="note" id="subhead"></p>
+</section>
+
+<section>
+<div class="legend noprint"><span><i class="pay"></i>Payday</span><span><i class="moved"></i>Moved from a weekend or Fed Bank holiday</span></div>
+<div class="months" id="months" style="margin-top:8px"></div>
+</section>
+
+<section class="card">
+<h2>Paydays by month</h2>
+<table>
+<thead><tr><th>Month</th><th>Paid in 2027</th><th>Dates</th></tr></thead>
+<tbody id="byMonth"></tbody>
+</table>
+</section>
+
+<section class="card" id="movedCard">
+<h2>Dates that move</h2>
+<table>
+<thead><tr><th>Scheduled</th><th>Paid on</th><th>Why</th></tr></thead>
+<tbody id="moved"></tbody>
+</table>
+<p class="note" id="movedNote"></p>
+</section>
+
+<section class="card">
+<h2>Federal Reserve Banks vs. OPM office closings in 2027</h2>
+<p class="note">Payday settlement follows when <b>Federal Reserve Banks</b> are closed, not when federal employees have a day off. On a Saturday holiday, Fed Banks stay open the Friday before; the Board of Governors is closed that Friday. Most federal employees, under OPM rules, observe that Friday off.</p>
+<table>
+<thead><tr><th>Date</th><th>Federal Reserve Banks</th><th>Most federal employees (OPM)</th></tr></thead>
+<tbody>
+<tr><td>Fri Jan 1, New Year’s Day</td><td>Closed</td><td>Off</td></tr>
+<tr><td>Fri Jun 18, Juneteenth observed</td><td><b>Open</b> (Board closed). Juneteenth is Saturday Jun 19.</td><td>Off</td></tr>
+<tr><td>Mon Jul 5, Independence Day observed</td><td>Closed (July 4 is Sunday)</td><td>Off</td></tr>
+<tr><td>Fri Dec 24, Christmas observed</td><td><b>Open</b> (Board closed). Christmas is Saturday Dec 25.</td><td>Off</td></tr>
+<tr><td>Fri Dec 31, New Year’s Day 2028 observed</td><td><b>Open</b> (Board closed). Jan 1, 2028 is Saturday.</td><td>Off</td></tr>
+</tbody>
+</table>
+<p class="note">Other 2027 Fed Bank closures (Banks and Board both closed): Mon Jan 18, Mon Feb 15, Mon May 31, Mon Sep 6, Mon Oct 11, Thu Nov 11, Thu Nov 25.</p>
+</section>
+
+<section class="card faq">
+<h2>FAQ</h2>
+<details open>
+<summary>How many biweekly paychecks are there in 2027?</summary>
+<p>Most biweekly cycles have <b>26</b> paydays. 2027 starts and ends on a Friday, so it has 53 Fridays. A Friday cycle whose first 2027 payday is <b>January 1</b> therefore has <b>27 scheduled</b> Fridays, ending December 31. January 1 is New Year’s Day and Federal Reserve Banks are closed, so if your employer pays the previous business day, that check is dated <b>Thursday, December 31, 2026</b>, and <b>26 checks are paid in 2027</b>. December 31, 2027 does not need to move: Fed Banks are open that Friday.</p>
+</details>
+<details>
+<summary>Which months have three biweekly paychecks in 2027?</summary>
+<p>Friday cycle starting January 1: scheduled three-paycheck months are January, July, and December. After moving January 1 into 2026, the paid three-paycheck months are <b>July (2, 16, 30)</b> and <b>December (3, 17, 31)</b>. Friday cycle starting January 8: <b>April (2, 16, 30)</b> and <b>October (1, 15, 29)</b>.</p>
+</details>
+<details>
+<summary>Do Juneteenth, Christmas Eve, or New Year’s Eve paydays move in 2027?</summary>
+<p>Not for bank settlement. Federal Reserve Banks stay open Friday June 18, Friday December 24, and Friday December 31. Those Fridays are OPM observed holidays for most federal employees, but they are not Fed Bank closures. A payday due Friday January 1 does move, to Thursday December 31, 2026.</p>
+</details>
+<details>
+<summary>Is this the official federal employee or OPM pay calendar?</summary>
+<p>No. Federal employees should use the official calendar from their payroll provider (NFC, GSA, DFAS, or their agency). This is a planning calendar for common private-employer cycles. Your employer’s dates win, and some employers do not move holiday paydays.</p>
+</details>
+<details>
+<summary>Can I print it?</summary>
+<p>Yes. Use “Print this calendar.” Save as PDF from the print dialog if you want a file.</p>
+</details>
+</section>
+
+<footer class="foot">
+<p><b>Sources</b>: <a href="https://www.federalreserve.gov/aboutthefed/k8.htm" target="_blank" rel="noopener">Federal Reserve Board, Holidays Observed — K.8</a> (2026–2030 table; last update July 8, 2026) · <a href="https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/" target="_blank" rel="noopener">U.S. Office of Personnel Management, Federal Holidays</a> (2027 schedule, and 2028 for New Year’s Day observed December 31, 2027). Checked November 15, 2026.</p>
+<p>Not payroll, tax, or HR advice. Moving a payday off a weekend or bank holiday is a common practice, not a statute. State payday laws and your employer’s policy control. Federal employees should use their official agency calendar.</p>
+<p>Made with AI help by Send This Instead · <a href="../">More free tools</a> · <a href="../2027-calendar/">2027 US federal holiday calendar</a> · <a href="https://3368936654923.gumroad.com/?utm_source=tools&utm_medium=2027-pay-periods" target="_blank" rel="noopener">Work email templates</a></p>
+<img class="px" src="https://hits.sh/gym-maker.github.io/2027-pay-periods.svg" alt="" aria-hidden="true">
+</footer>
+</div>
+<script src="pay_periods.js"></script>
+<script>
+(function () {
+  var P = PayPeriods;
+  var MON = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  function $(id) { return document.getElementById(id); }
+  function pretty(s) {
+    var o = P.parseYMD(s);
+    return DOW[P.dow(o)] + ' ' + MON[o.m - 1].slice(0, 3) + ' ' + o.d;
+  }
+  function why(row) {
+    if (row.fedClosed) return 'Fed Banks closed' + (row.fedClosedName ? ' (' + row.fedClosedName + ')' : '');
+    if (row.weekend) return P.dow(row.scheduled) === 6 ? 'Saturday' : 'Sunday';
+    return 'Previous business day';
+  }
+
+  function fillCycles() {
+    var weekday = +$('weekday').value;
+    var freq = $('freq').value;
+    var step = freq === 'weekly' ? 7 : 14;
+    var opts = P.firstPaydayOptions(2027, weekday, step);
+    var sel = $('cycle');
+    var prev = sel.value;
+    sel.innerHTML = opts.map(function (o, i) {
+      return '<option value="' + i + '">' + pretty(P.toYMD(o)) + '</option>';
+    }).join('');
+    if (prev && +prev < opts.length) sel.value = prev;
+  }
+
+  function toggleFields() {
+    var freq = $('freq').value;
+    var step = freq === 'weekly' || freq === 'biweekly';
+    $('stepWrap').hidden = !step;
+    $('monthWrap').hidden = freq !== 'monthly';
+    if (step) fillCycles();
+  }
+
+  function optionsFromForm() {
+    var freq = $('freq').value;
+    var opts = { year: 2027, frequency: freq, shift: $('shift').checked };
+    if (freq === 'weekly' || freq === 'biweekly') {
+      var known = $('known').value;
+      if (known) {
+        var a = P.parseYMD(known);
+        if (a) opts.anchor = a;
+        else { opts.weekday = +$('weekday').value; opts.cycle = +$('cycle').value; }
+      } else {
+        opts.weekday = +$('weekday').value;
+        opts.cycle = +$('cycle').value;
+      }
+    } else if (freq === 'monthly') {
+      opts.monthDay = $('monthDay').value === 'last' ? 'last' : +$('monthDay').value;
+    }
+    return opts;
+  }
+
+  function renderCalendar(result) {
+    var paid = {};
+    var movedPaid = {};
+    result.paidInYear.forEach(function (r) {
+      paid[r.paidYmd] = r;
+      if (r.moved) movedPaid[r.paidYmd] = r;
+    });
+    var html = '';
+    for (var m = 1; m <= 12; m++) {
+      html += '<div class="month"><h3>' + MON[m - 1] + '</h3><div class="grid">';
+      ['S','M','T','W','T','F','S'].forEach(function (lab, i) {
+        html += '<div class="dow' + (i === 0 ? ' sun' : i === 6 ? ' sat' : '') + '">' + lab + '</div>';
+      });
+      var firstDow = P.dow({ y: 2027, m: m, d: 1 });
+      for (var i = 0; i < firstDow; i++) html += '<div></div>';
+      var dim = P.daysInMonth(2027, m);
+      for (var day = 1; day <= dim; day++) {
+        var o = { y: 2027, m: m, d: day };
+        var k = P.toYMD(o);
+        var w = P.dow(o);
+        var cls = 'd' + (w === 0 ? ' sun' : w === 6 ? ' sat' : '');
+        if (movedPaid[k]) cls += ' pay moved';
+        else if (paid[k]) cls += ' pay';
+        html += '<div class="' + cls + '">' + day + '</div>';
+      }
+      html += '</div></div>';
+    }
+    $('months').innerHTML = html;
+  }
+
+  function render() {
+    var result = P.build(optionsFromForm());
+    var extraWord = result.frequency === 'weekly' ? '5-paycheck' : '3-paycheck';
+    $('stats').innerHTML =
+      '<div class="stat"><b>' + result.scheduledCount + '</b><span>scheduled in 2027</span></div>' +
+      '<div class="stat"><b>' + result.paidCount + '</b><span>paid in 2027' + (result.shift ? ' after shifts' : '') + '</span></div>' +
+      '<div class="stat"><b>' + result.extraPayMonthsPaid.length + '</b><span>' + extraWord + ' months</span></div>' +
+      '<div class="stat"><b>' + (result.moved.length + result.movedIn.length) + '</b><span>dates that move</span></div>';
+
+    var head = 'This cycle has <span class="big">' + result.paidCount + '</span> payday' + (result.paidCount === 1 ? '' : 's') + ' paid in 2027.';
+    if (result.scheduledCount !== result.paidCount) {
+      head += ' There are <b>' + result.scheduledCount + ' scheduled</b> dates in the calendar year.';
+    }
+    $('headline').innerHTML = head;
+
+    var bits = [];
+    if (result.frequency === 'biweekly' && result.scheduledCount === 27 && result.paidCount === 26) {
+      bits.push('The January 1 payday is New Year’s Day, and Federal Reserve Banks are closed, so it is paid Thursday, December 31, 2026 if you use the previous-business-day rule.');
+    }
+    if (result.movedIn.length) {
+      bits.push(result.movedIn.map(function (r) {
+        return pretty(r.scheduledYmd) + ' is paid on ' + pretty(r.paidYmd) + ', so it counts in 2027.';
+      }).join(' '));
+    }
+    if (result.extraPayMonthsPaid.length) {
+      bits.push((result.frequency === 'weekly' ? 'Five-paycheck' : 'Three-paycheck') + ' months (paid dates): ' +
+        result.extraPayMonthsPaid.map(function (x) { return MON[x.month - 1] + ' (' + x.count + ')'; }).join(', ') + '.');
+    }
+    $('subhead').textContent = bits.join(' ');
+
+    var byM = '';
+    for (var m = 1; m <= 12; m++) {
+      var rows = result.paidInYear.filter(function (r) { return r.paid.m === m; });
+      var dates = rows.map(function (r) {
+        return pretty(r.paidYmd) + (r.moved ? ' <span class="note">(from ' + pretty(r.scheduledYmd) + ')</span>' : '');
+      }).join(', ');
+      var cls = rows.length >= result.extraThreshold ? '' : ' class="muted-row"';
+      byM += '<tr' + cls + '><td>' + MON[m - 1] + '</td><td><b>' + rows.length + '</b></td><td>' + (dates || '—') + '</td></tr>';
+    }
+    $('byMonth').innerHTML = byM;
+
+    var moveRows = result.moved.concat(result.movedIn);
+    $('moved').innerHTML = moveRows.length ? moveRows.map(function (r) {
+      return '<tr><td>' + pretty(r.scheduledYmd) + '</td><td><b>' + pretty(r.paidYmd) + '</b></td><td>' + why(r) + '</td></tr>';
+    }).join('') : '<tr><td colspan="3">No dates move on this cycle with the current settings.</td></tr>';
+    var note = [];
+    if (result.frequency === 'biweekly' || result.frequency === 'weekly') {
+      var openStay = result.scheduledInYear.filter(function (r) { return r.banksOpenBoardClosed && !r.moved; });
+      if (openStay.length) {
+        note.push('These Fridays stay put because Federal Reserve Banks are open (the Board is closed; most federal employees have the day off): ' +
+          openStay.map(function (r) { return pretty(r.scheduledYmd); }).join(', ') + '.');
+      }
+    }
+    $('movedNote').textContent = note.join(' ');
+    $('movedCard').style.display = '';
+
+    renderCalendar(result);
+  }
+
+  function applyPreset(name) {
+    $('known').value = '';
+    $('shift').checked = true;
+    if (name === 'fri-1') {
+      $('freq').value = 'biweekly'; $('weekday').value = '5'; toggleFields(); $('cycle').value = '0';
+    } else if (name === 'fri-8') {
+      $('freq').value = 'biweekly'; $('weekday').value = '5'; toggleFields(); $('cycle').value = '1';
+    } else if (name === 'semi-eom') {
+      $('freq').value = 'semi-15-eom'; toggleFields();
+    } else if (name === 'semi-1') {
+      $('freq').value = 'semi-1-15'; toggleFields();
+    }
+    render();
+  }
+
+  $('freq').addEventListener('change', function () { $('known').value = ''; toggleFields(); render(); });
+  $('weekday').addEventListener('change', function () { $('known').value = ''; fillCycles(); render(); });
+  $('cycle').addEventListener('change', function () { $('known').value = ''; render(); });
+  $('known').addEventListener('change', render);
+  $('shift').addEventListener('change', render);
+  $('monthDay').addEventListener('change', render);
+  document.querySelectorAll('[data-preset]').forEach(function (btn) {
+    btn.addEventListener('click', function () { applyPreset(btn.getAttribute('data-preset')); });
+  });
+
+  toggleFields();
+  render();
+})();
+</script>
+</body>
+</html>
