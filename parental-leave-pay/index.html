@@ -125,6 +125,14 @@
 </div>
 </div>
 <div id="out" class="result" style="margin-top:14px"></div>
+<aside class="paid-cta noprint" aria-label="2026 연말정산 미리 점검 시트">
+<p class="paid-kicker">유료 템플릿</p>
+<h3>2026 연말정산 미리 점검 시트</h3>
+<p class="paid-inside">연말정산 전에 카드·현금영수증 사용액을 적어 보고, 남은 기간 계획을 세우며, 서류 체크리스트를 함께 쓰는 엑셀입니다. 이 계산기의 급여·수당 공식과는 별개입니다. 참고용이며 홈택스에서 최종 확인하세요. $3.</p>
+<p><a class="btn" href="https://3368936654923.gumroad.com/l/vkxsng?utm_source=tools&amp;utm_campaign=parental-leave-pay_paid" target="_blank" rel="noopener">2026 연말정산 미리 점검 시트 받기 — $3</a></p>
+<p class="paid-secondary">무료 업무 메일 샘플 5편도 있어요: <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=parental-leave-pay" target="_blank" rel="noopener">Send This Instead 무료 샘플</a></p>
+</aside>
+
 </section>
 
 <section class="card">
@@ -216,7 +224,6 @@
 </div>
 <script src="parental_leave.js"></script>
 <script>
-var SAMPLE_CTA='<p class="note noprint tool-cta">영어로 업무 메일을 쓸 때 참고할 수 있는 무료 샘플 5편이 있어요. <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=parental-leave-pay" target="_blank" rel="noopener">Send This Instead 무료 샘플</a></p>';
 function $(i){return document.getElementById(i)}
 function won(n){
   if(n==null||!isFinite(n)) return '—';
@@ -349,8 +356,7 @@ function render(){
     '<div class="stat"><b class="big">'+won(r.total)+'</b><span>예상 총액 (전액 지급)</span></div>'+
     '</div>'+
     '<p class="note">2025.1.1. 이후 사용 기간은 사후지급 없이 전액을 휴직 중에 받아요. 원 미만 처리는 법령에서 확인하지 못해 계산값을 그대로 적었어요.</p>'+
-    table+
-    SAMPLE_CTA;
+    table;
 }
 ['ordinary','mode','start','end','alreadyMonths','employerPay','commonMonths','commonExtraDays','insured','extend18'].forEach(function(i){
   $(i).addEventListener('input',render);

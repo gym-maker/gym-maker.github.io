@@ -36,3 +36,18 @@ a{color:var(--pine)}.tag{display:inline-block;font-size:.75rem;background:var(--
 .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.82rem;color:var(--mute)}.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:4px}
 .px{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 @media print{body{background:#fff;font-size:11px}.noprint,footer.foot,.card.faq{display:none!important}.wrap{max-width:none;padding:0}.months{grid-template-columns:repeat(3,1fr);gap:6px}.month{border-color:#999;padding:4px}.grid .d{padding:1px 0}h1{font-size:16px}.lead{display:none}@page{size:A4 portrait;margin:8mm}}
+
+/* Paid add-on card — honest, no urgency */
+.paid-cta{margin:14px 0 4px;padding:14px 16px;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--pine);border-radius:14px}
+.paid-cta .paid-kicker{margin:0 0 4px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--pine)}
+.paid-cta h3{margin:0 0 6px;font-size:1.08rem}
+.paid-cta .paid-inside{margin:0 0 10px;font-size:.92rem;color:var(--ink)}
+.paid-cta .btn{display:inline-block;text-decoration:none;margin:0 0 8px}
+.paid-cta .paid-secondary{margin:8px 0 0;font-size:.85rem;color:var(--mute)}
+.paid-cta .paid-secondary a{font-weight:600}
+.paid-strip h2{margin-bottom:6px}
+.paid-strip ul{margin:10px 0 0;padding:0;list-style:none}
+.paid-strip li{padding:8px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.paid-strip li:last-child{border-bottom:0}
+.paid-strip li a{font-weight:700}
+@media print{.paid-cta,.paid-strip{display:none!important}}

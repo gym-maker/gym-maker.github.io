@@ -53,6 +53,14 @@
 </div>
 <div id="wmode" style="display:none"><label class="f" for="hpw">1주 소정근로시간</label><input id="hpw" type="number" inputmode="decimal" value="40" min="0" max="68" step="0.5"></div>
 <div id="out" class="result" style="margin-top:14px"></div>
+<aside class="paid-cta noprint" aria-label="2026 연말정산 미리 점검 시트">
+<p class="paid-kicker">유료 템플릿</p>
+<h3>2026 연말정산 미리 점검 시트</h3>
+<p class="paid-inside">연말정산 전에 카드·현금영수증 사용액을 적어 보고, 남은 기간 계획을 세우며, 서류 체크리스트를 함께 쓰는 엑셀입니다. 이 계산기의 급여·수당 공식과는 별개입니다. 참고용이며 홈택스에서 최종 확인하세요. $3.</p>
+<p><a class="btn" href="https://3368936654923.gumroad.com/l/vkxsng?utm_source=tools&amp;utm_campaign=2027-minimum-wage_paid" target="_blank" rel="noopener">2026 연말정산 미리 점검 시트 받기 — $3</a></p>
+<p class="paid-secondary">무료 업무 메일 샘플 5편도 있어요: <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=2027-minimum-wage" target="_blank" rel="noopener">Send This Instead 무료 샘플</a></p>
+</aside>
+
 </section>
 
 <section class="card">
@@ -84,7 +92,6 @@
 </footer>
 </div>
 <script>
-var SAMPLE_CTA='<p class="note noprint tool-cta">영어로 업무 메일을 쓸 때 참고할 수 있는 무료 샘플 5편이 있어요. <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=2027-minimum-wage" target="_blank" rel="noopener">Send This Instead 무료 샘플</a></p>';
 var MIN27=10700,MIN26=10320,W=365/7/12;
 function won(n){return Math.round(n).toLocaleString('ko-KR')+'원'}
 function $(i){return document.getElementById(i)}
@@ -106,7 +113,7 @@ function calc(){
  '<h3>4대보험 근로자 부담 추정 (2027 요율)</h3><table><tbody>'+
  '<tr><td>국민연금 5.0% (기준소득월액 41만~659만 원)</td><td>'+won(np)+'</td></tr><tr><td>건강보험 3.595%</td><td>'+won(hp)+'</td></tr><tr><td>장기요양 (건보료 × 13.90%)</td><td>'+won(lp)+'</td></tr><tr><td>고용보험 0.9%</td><td>'+won(ep)+'</td></tr>'+
  '<tr><th>공제 합계</th><th>'+won(ins)+'</th></tr><tr><th>4대보험 뺀 금액 (소득세 별도)</th><th>'+won(mp-ins)+'</th></tr></tbody></table>'+
- '<p class="note">2026년 시급 10,320원이었다면 같은 조건 월급은 '+won(mh*MIN26)+'이에요. 4대보험은 가입 제외(월 60시간 미만 등), 소득세·지방소득세를 반영하지 않은 참고값이에요(국민연금 기준소득월액 41만~659만 원 범위는 반영).</p>'+SAMPLE_CTA;
+ '<p class="note">2026년 시급 10,320원이었다면 같은 조건 월급은 '+won(mh*MIN26)+'이에요. 4대보험은 가입 제외(월 60시간 미만 등), 소득세·지방소득세를 반영하지 않은 참고값이에요(국민연금 기준소득월액 41만~659만 원 범위는 반영).</p>';
  var pay=+$('pay').value||0,ph=+$('phw').value||0,pjh=juhyuH(ph),pmh=Math.round((Math.min(ph,40)+pjh)*W),hw=pmh?pay/pmh:0;
  $('chk').innerHTML=pmh?('환산 시급 <b>'+won(hw)+'</b> (월 '+pmh+'시간 기준) → '+(hw>=MIN27?'<span class="ok">2027 최저시급 이상이에요.</span>':'<span class="bad">2027 최저시급보다 '+won(MIN27-hw)+' 낮아요. 2027년 기준 최소 '+won(pmh*MIN27)+'이 필요해요.</span>')):'';
 }

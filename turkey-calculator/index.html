@@ -86,6 +86,14 @@
 </div>
 </div>
 <div id="out" class="result" style="margin-top:14px"></div>
+<aside class="paid-cta noprint" aria-label="Thanksgiving Day-Of Planner">
+<p class="paid-kicker">A paid add-on</p>
+<h3>Thanksgiving Day-Of Planner</h3>
+<p class="paid-inside">A printable US Letter PDF: a day-of cooking timeline you can fill in, a shopping list, an oven &amp; fridge worksheet, and a USDA thaw/roast reference that uses the same figures as this calculator. $4.</p>
+<p><a class="btn" href="https://3368936654923.gumroad.com/l/jahyb?utm_source=tools&amp;utm_campaign=turkey-calculator_paid" target="_blank" rel="noopener">Get it — $4</a></p>
+<p class="paid-secondary">A free 5-email sample is also here: <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=turkey-calculator" target="_blank" rel="noopener">Send This Instead — free sample</a></p>
+</aside>
+
 </section>
 
 <section class="card">
@@ -138,7 +146,6 @@
 </div>
 <script src="turkey.js"></script>
 <script>
-var SAMPLE_CTA='<p class="note noprint tool-cta">If you write work emails in English, there is a free 5-template sample you can download: <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=turkey-calculator" target="_blank" rel="noopener">Send This Instead — free sample</a></p>';
 function $(i){return document.getElementById(i)}
 var T=window.TurkeyCalc;
 function prettyDate(o){
@@ -227,8 +234,7 @@ function render(){
     roastHtml+
     '<p>Check 165°F in the innermost thigh and wing and the thickest part of the breast'+(r.stuffed?', and in the center of the stuffing':'')+'. Then let it rest 20 minutes before carving.</p>'+
     '<h3>When to start cooking</h3>'+
-    (startHtml||'<p class="note">No start time is shown because there is no USDA roast range for this weight or stuffing choice.</p>')+
-    SAMPLE_CTA;
+    (startHtml||'<p class="note">No start time is shown because there is no USDA roast range for this weight or stuffing choice.</p>');
 }
 ['guests','leftovers','kind','stuffed','dinnerDate','dinnerTime'].forEach(function(i){
   $(i).addEventListener('input',render);
