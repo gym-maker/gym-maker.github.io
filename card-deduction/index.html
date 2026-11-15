@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 연말정산 신용카드 소득공제 계산기 — 카드 소득공제 25% · 체크 vs 신용</title>
+<meta name="description" content="2026년 귀속 연말정산용 신용카드 등 소득공제 계산기. 총급여 25% 문턱, 결제수단별 공제율, 자녀 수에 따른 한도, 남은 기간 신용카드와 체크카드 중 어느 쪽이 유리한지를 보여 줘요. 조세특례제한법 기준, 참고용입니다.">
+<link rel="canonical" href="https://gym-maker.github.io/card-deduction/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#F5F0E8">
+<meta property="og:type" content="website"><meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="2026 연말정산 신용카드 소득공제 계산기">
+<meta property="og:description" content="총급여 25% 문턱, 공제액·한도, 남은 기간 신용 vs 체크 힌트. 2026년 귀속 법령 기준, 참고용입니다.">
+<meta property="og:url" content="https://gym-maker.github.io/card-deduction/">
+<meta property="og:image" content="https://gym-maker.github.io/card-deduction/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/tools.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"신용카드 소득공제는 총급여의 25%를 넘어야 하나요?","acceptedAnswer":{"@type":"Answer","text":"네. 조세특례제한법 제126조의2 제1항에 따라, 국내 신용카드·현금영수증·직불·기명식 선불카드 등 사용금액의 연간합계액이 해당 과세연도 총급여액의 25%(최저사용금액)를 초과하는 경우에만 공제합니다. 문턱과 같은 금액까지만 쓰면 공제액은 0원입니다."}},
+{"@type":"Question","name":"2026년 신용카드 소득공제율은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"2026년 귀속은 신용카드 15%, 체크·직불·기명식 선불·현금영수증 30%, 전통시장 40%, 대중교통 40%, 총급여 7천만원 이하자의 문화체육 사용분(도서·신문·공연·박물관·미술관·영화·체육시설) 30%입니다. 2023년 한시 상향(전통시장 50%, 대중교통 80% 등)은 적용되지 않습니다."}},
+{"@type":"Question","name":"2026년부터 자녀가 있으면 한도가 올라가나요?","acceptedAnswer":{"@type":"Answer","text":"2026년 1월 1일 이후 지출분부터, 기본한도는 자녀등 수에 따라 달라집니다. 총급여 7천만원 이하는 무자녀 300만원, 1명 350만원, 2명 이상 400만원입니다. 7천만원 초과는 250만원, 275만원, 300만원입니다. 자녀등은 법 제10항에서 대통령령으로 정하는 부양가족입니다. 이 계산기는 입력한 인원을 그대로 쓰며, 나이·소득·다른 거주자 기본공제 여부는 직접 판단해 넣어야 합니다."}},
+{"@type":"Question","name":"남은 두 달은 신용카드와 체크카드 중 무엇이 유리한가요?","acceptedAnswer":{"@type":"Answer","text":"문턱을 넘긴 뒤이고 기본한도에 아직 여유가 있으면, 같은 일반 소비라도 체크카드·현금영수증(30%)이 신용카드(15%)보다 공제액이 큽니다. 전통시장·대중교통은 40%입니다. 기본한도에 이미 닿았다면 일반 신용·체크를 더 써도 이 공제액은 늘지 않고, 전통시장·대중교통(총급여 7천만원 이하면 문화체육도)만 추가한도 안에서 더 붙을 수 있습니다."}},
+{"@type":"Question","name":"소비증가분 공제는 2026년에도 되나요?","acceptedAnswer":{"@type":"Answer","text":"되지 않습니다. 조세특례제한법 제126조의2 제2항 제7호는 2024년 과세연도 계산에 한정됩니다."}}
+]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<h1>2026 연말정산 신용카드 소득공제 계산기</h1>
+<p class="lead">총급여와 카드·현금영수증 사용액을 넣으면, 공제 문턱(총급여 25%), 공제액, 한도를 계산하고 남은 기간 신용카드와 체크카드 중 어느 쪽이 유리한지 힌트를 줘요. <b>2026년 귀속</b> 조세특례제한법 기준이며 <b>참고용</b>입니다. 정확한 금액은 국세청 홈택스에서 확인하세요.</p>
+</header>
+
+<section class="card">
+<div class="stats">
+<div class="stat"><b>25%</b><span>총급여 대비 최저사용금액 (문턱)</span></div>
+<div class="stat"><b>15·30·40%</b><span>신용·체크·전통시장·대중교통 공제율</span></div>
+<div class="stat"><b>자녀 한도</b><span>2026년부터 자녀등 수로 기본한도 확대</span></div>
+<div class="stat"><b>소비증가분 없음</b><span>제7호는 2024년 귀속에만 적용</span></div>
+</div>
+</section>
+
+<section class="card">
+<h2>내 사용액으로 계산</h2>
+<p class="note">금액은 연말정산 간소화에 나오는 것처럼 <b>겹치지 않게</b> 넣어요. 전통시장·대중교통·문화비로 적은 금액은 위의 일반 신용카드·체크카드 칸에 다시 넣지 마세요. 처음 값은 법령 산식으로 풀어 본 예시이며, 국세청이 공개한 사례 원문은 아닙니다.</p>
+<div class="row" style="margin:8px 0 12px">
+<button type="button" class="btn ghost" id="loadEx">산식 예시 넣기</button>
+</div>
+<div class="two">
+<div>
+<label class="f" for="salary">총급여 (세전, 원)</label>
+<input id="salary" type="number" inputmode="numeric" min="0" step="10000" value="40000000">
+<p class="note" style="margin:6px 0 0">근로소득 총급여액입니다. 일용근로자는 이 공제 대상이 아닙니다.</p>
+</div>
+<div>
+<label class="f" for="children">자녀등 수 (한도 계산용)</label>
+<select id="children">
+<option value="0" selected>없음 (기본한도)</option>
+<option value="1">1명</option>
+<option value="2">2명 이상</option>
+</select>
+<p class="note" style="margin:6px 0 0">법 제10항의 「자녀등」은 대통령령으로 정하는 부양가족입니다. 이 계산기는 입력한 인원을 그대로 씁니다. 나이·소득·다른 거주자의 기본공제 여부는 직접 판단해 주세요.</p>
+</div>
+</div>
+<div class="two">
+<div>
+<label class="f" for="credit">신용카드 (일반, 원)</label>
+<input id="credit" type="number" inputmode="numeric" min="0" step="10000" value="12000000">
+</div>
+<div>
+<label class="f" for="debit">체크카드·현금영수증 등 (일반, 원)</label>
+<input id="debit" type="number" inputmode="numeric" min="0" step="10000" value="4000000">
+<p class="note" style="margin:6px 0 0">직불·기명식 선불카드·현금영수증을 포함해요. 전통시장·대중교통·문화비에 넣은 금액은 제외하세요.</p>
+</div>
+</div>
+<div class="two">
+<div>
+<label class="f" for="market">전통시장 (원)</label>
+<input id="market" type="number" inputmode="numeric" min="0" step="10000" value="2000000">
+</div>
+<div>
+<label class="f" for="transit">대중교통 (원)</label>
+<input id="transit" type="number" inputmode="numeric" min="0" step="10000" value="1000000">
+</div>
+</div>
+<div class="two">
+<div>
+<label class="f" for="culture">도서·공연 등 문화체육 (원)</label>
+<input id="culture" type="number" inputmode="numeric" min="0" step="10000" value="0">
+<p class="note" style="margin:6px 0 0">도서·신문·공연·박물관·미술관·영화·체육시설 사용분입니다. 별도 30%는 총급여 7천만원 이하만 적용됩니다.</p>
+</div>
+<div id="culturePayWrap">
+<label class="f" for="culturePay">문화비 결제 수단 (총급여 7천만원 초과 시)</label>
+<select id="culturePay">
+<option value="credit" selected>신용카드</option>
+<option value="debit">체크카드·현금영수증 등</option>
+</select>
+<p class="note" style="margin:6px 0 0">총급여가 7천만원을 넘으면 문화비는 별도 30%가 아니라, 선택한 결제 수단의 공제율로 계산합니다.</p>
+</div>
+</div>
+<div>
+<label class="f" for="extraSpend">남은 기간 예상 추가 지출 (원, 선택)</label>
+<input id="extraSpend" type="number" inputmode="numeric" min="0" step="10000" value="1000000">
+<p class="note" style="margin:6px 0 0">이 금액을 앞으로 더 쓴다고 보고, 신용카드·체크카드·전통시장·대중교통으로 썼을 때 공제액이 얼마나 달라지는지 비교해요.</p>
+</div>
+<div id="out" class="result" style="margin-top:14px"></div>
+</section>
+
+<section class="card">
+<h2>이 계산기가 쓰는 산식 (2026년 귀속)</h2>
+<table>
+<thead><tr><th>항목</th><th>내용</th></tr></thead>
+<tbody>
+<tr><td>최저사용금액 (문턱)</td><td>총급여액 × 25%. 사용액 합계가 이 금액을 <b>초과</b>해야 공제됩니다 (제1항)</td></tr>
+<tr><td>공제율</td><td>신용카드 15%, 체크·직불·기명식 선불·현금영수증 30%, 전통시장 40%, 대중교통 40%, 총급여 7천만원 이하 문화체육 30% (제2항 제1호~제5호)</td></tr>
+<tr><td>문턱 차감</td><td>공제율이 낮은 사용분부터 문턱을 채운 것으로 보고 뺍니다. 신용 → 체크·문화 → 전통시장·대중교통 순 (제2항 제6호)</td></tr>
+<tr><td>기본한도</td><td>총급여 7천만원 이하: 무자녀 300만원, 자녀등 1명 350만원, 2명 이상 400만원. 초과: 250만원, 275만원, 300만원. 2026.1.1. 이후 지출분 (제10항, 재정경제부 안내)</td></tr>
+<tr><td>추가한도</td><td>계산액이 기본한도를 넘을 때만, 초과분과 전통시장·대중교통 공제액(7천만원 이하는 문화체육 공제액도 합산) 중 작은 쪽을 더합니다. 한도는 7천만원 이하 300만원, 초과 200만원 (제11항 제1호)</td></tr>
+<tr><td>소비증가분</td><td>제2항 제7호는 2024년 과세연도에 한정되어, 2026년 귀속에는 더하지 않습니다</td></tr>
+</tbody>
+</table>
+<p class="note">국외 사용분, 사업 관련 비용, 자동차 구입(중고차 일부 예외), 그 밖에 대통령령으로 정하는 제외 항목은 사용액에 넣지 마세요 (제1항·제4항, 시행령 제121조의2). 가족 사용액 합산 여부도 시행령 요건을 따릅니다. 이 계산기는 그 판정을 대신하지 않아요.</p>
+</section>
+
+<section class="card faq">
+<h2>자주 묻는 질문</h2>
+<details open>
+<summary>이 금액이 실제 연말정산 공제액과 다를 수 있나요?</summary>
+<p>있어요. 이 계산기는 참고용이에요. 간소화에 잡히지 않는 제외 항목, 가족 사용액, 자녀등 요건, 원 미만 처리처럼 이 페이지가 대신 판단하지 않는 부분이 있습니다. <b>정확한 금액은 국세청 홈택스</b>의 연말정산 간소화·미리보기와 회사에서 확인하세요.</p>
+</details>
+<details>
+<summary>문턱(총급여 25%)을 넘기기 전에는 공제가 전혀 없나요?</summary>
+<p>없습니다. 법 제1항은 연간합계액이 최저사용금액을 <b>초과하는 경우</b>에만 공제한다고 정합니다. 문턱과 똑같은 금액까지만 쓰면 공제액은 0원입니다.</p>
+</details>
+<details>
+<summary>남은 두 달은 신용카드와 체크카드 중 무엇을 쓰는 게 유리한가요?</summary>
+<p>문턱을 넘긴 뒤이고 기본한도에 여유가 있으면, 같은 일반 소비는 체크카드·현금영수증(30%)이 신용카드(15%)보다 공제액이 큽니다. 전통시장과 대중교통은 40%입니다. 기본한도에 이미 닿았다면 일반 신용·체크를 더 써도 이 공제액은 늘지 않고, 전통시장·대중교통(총급여 7천만원 이하면 문화체육도)만 추가한도 안에서 더 붙을 수 있습니다. 한도를 모두 채운 뒤에는 결제 수단을 바꿔도 이 공제 항목의 금액은 늘지 않습니다. 카드 포인트·수수료는 이 계산에 넣지 않았어요.</p>
+</details>
+<details>
+<summary>문화비는 누구나 30%인가요?</summary>
+<p>아닙니다. 문화체육사용분 별도 30%는 총급여 7천만원 이하에게만 적용됩니다 (제2항 본문). 총급여가 7천만원을 넘으면 그 금액은 신용카드 15% 또는 체크·현금 30% 같은 결제 수단별 공제율로 계산하고, 추가한도 합산에도 넣지 않습니다.</p>
+</details>
+<details>
+<summary>작년에 카드를 더 쓰면 받던 소비증가분 공제는요?</summary>
+<p>2026년 귀속에는 적용되지 않습니다. 제2항 제7호는 2024년 과세연도의 신용카드등소득공제금액을 계산하는 경우로 한정합니다.</p>
+</details>
+<details>
+<summary>원 미만은 어떻게 처리하나요?</summary>
+<p>법령 본문에서 이 공제의 원 미만 처리 규칙을 확인하지 못했어요. 이 계산기는 나눗셈이 필요한 문턱(총급여 × 25%)을 그대로 두고, 원 미만을 임의로 버리거나 올리지 않습니다. 총급여가 4로 나누어떨어지면 결과는 원 단위 정수입니다.</p>
+</details>
+</section>
+
+<footer class="foot">
+<p><b>출처</b> (확인일 2026-11-16):
+<a href="https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&amp;lsId=001584&amp;lsJoLnkSeq=1001060529" target="_blank" rel="noopener">조세특례제한법 제126조의2 (시행 2026. 9. 18., 법률 제21467호)</a> ·
+<a href="https://whatsnew.mofe.go.kr/mec/ots/dif/view.do?comBaseCd=DIFTYPCD&amp;difField1=DIFFIELD05&amp;difSer=a4949398-2661-4119-8503-a5da5336cfa8&amp;temp=2026&amp;temp2=HALF001" target="_blank" rel="noopener">재정경제부 「이렇게 달라집니다」 — 자녀 수에 따라 신용카드등 소득공제 한도 확대 (2026.1.1. 이후 지출분)</a> ·
+<a href="https://www.korea.kr/news/policyNewsView.do?newsId=148953499" target="_blank" rel="noopener">정책브리핑 — 자녀 수에 따라 신용카드 등 소득공제 한도 확대 (기획재정부, 2025.10.30.)</a> ·
+<a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7794&amp;mi=2468" target="_blank" rel="noopener">국세청 현금영수증 개요 — 소비자 소득공제 산식</a> ·
+<a href="https://call.nts.go.kr/call/qna/selectQnaInfo.do?ctgId=CTG11898&amp;mi=1318" target="_blank" rel="noopener">국세청 126 자주 묻는 질문 — 신용카드 등 사용액</a> ·
+<a href="https://www.hometax.go.kr" target="_blank" rel="noopener">국세청 홈택스</a>
+</p>
+<p><b>안내</b>: 참고용 계산기예요. 숫자를 지어내지 않았고, 확인일 현재 법령·재정경제부·국세청 페이지를 기준으로 2026년 귀속 규칙만 넣었어요. 국세청 현금영수증 개요 페이지의 기본한도 표기는 자녀 수 확대 전 금액(7천만원 이하 300만원, 초과 250만원)으로 남아 있어, 한도는 법 제10항과 재정경제부 안내를 따릅니다. 「자녀등」의 나이·소득 등 구체 요건은 시행령 제121조의2에 있으며, 이 계산기는 그 해당 여부를 자동으로 판정하지 않습니다. 원 미만 처리 규칙도 법령 본문에서 확인하지 못했습니다. <b>정확한 금액은 국세청 홈택스에서 확인</b>하세요. 마지막 확인 2026-11-16.</p>
+<p>AI 도움을 받아 만들었어요 · <a href="../">Send This Instead 무료 도구 모음</a> · <a href="../severance-pay/">퇴직금 계산기</a> · <a href="../2027-take-home-pay/">2027 연봉 실수령액 계산기</a></p>
+<p class="note noprint tool-cta">영어로 업무 메일을 쓸 때 참고할 수 있는 무료 샘플 5편이 있어요. <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=card-deduction" target="_blank" rel="noopener">Send This Instead 무료 샘플</a></p>
+<img class="px" src="https://hits.sh/gym-maker.github.io/card-deduction.svg" alt="" aria-hidden="true">
+</footer>
+</div>
+<script src="card-deduction.js"></script>
+<script>
+var SAMPLE_CTA='<p class="note noprint tool-cta">영어로 업무 메일을 쓸 때 참고할 수 있는 무료 샘플 5편이 있어요. <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=card-deduction" target="_blank" rel="noopener">Send This Instead 무료 샘플</a></p>';
+function $(i){return document.getElementById(i)}
+function won(n){
+  if(!isFinite(n)) return '—';
+  if(Math.abs(n-Math.round(n))<1e-6) return Math.round(n).toLocaleString('ko-KR')+'원';
+  return Number(n).toLocaleString('ko-KR',{maximumFractionDigits:2})+'원';
+}
+var C=window.CardDeduction;
+var EXAMPLE={salary:'40000000',children:'0',credit:'12000000',debit:'4000000',market:'2000000',transit:'1000000',culture:'0',culturePay:'credit',extraSpend:'1000000'};
+function loadExample(){
+  Object.keys(EXAMPLE).forEach(function(k){ if($(k)) $(k).value=EXAMPLE[k]; });
+  render();
+}
+function inputs(){
+  return {
+    salary:+$('salary').value||0,
+    children:+$('children').value||0,
+    credit:+$('credit').value||0,
+    debit:+$('debit').value||0,
+    market:+$('market').value||0,
+    transit:+$('transit').value||0,
+    culture:+$('culture').value||0,
+    culturePayMethod:$('culturePay').value
+  };
+}
+function hintHtml(r, cmp){
+  var parts=[];
+  if(!r.exceedsThreshold){
+    parts.push('<p class="bad">아직 공제 문턱에 닿지 않았어요. 문턱까지 <b>'+won(r.remainingToThreshold)+'</b>가 남았습니다. 이 금액을 넘긴 뒤에야 공제가 시작됩니다.</p>');
+  }else if(r.hitAdditionalCap || (r.hitBaseLimit && r.additional===r.specialCapped && cmp.credit.delta===0 && cmp.debit.delta===0 && cmp.market.delta===0)){
+    parts.push('<p class="ok">기본한도와 추가한도에 해당하는 금액까지 반영된 상태예요. 남은 기간에 일반 신용카드·체크카드를 더 써도 이 공제액은 늘지 않습니다.</p>');
+  }else if(r.hitBaseLimit){
+    parts.push('<p class="ok">기본한도에는 이미 닿았습니다. 일반 신용카드·체크카드를 더 써도 공제액은 늘어나지 않아요. 전통시장·대중교통'+(r.lowSalary?'·문화체육':'')+'은 추가한도 안에서 더 붙을 수 있습니다.</p>');
+  }else{
+    parts.push('<p class="ok">문턱을 넘겼고, 기본한도에 아직 여유가 있어요. 같은 일반 소비라면 체크카드·현금영수증(30%)이 신용카드(15%)보다 공제액이 큽니다. 전통시장·대중교통은 40%입니다.</p>');
+  }
+  if(cmp.amount>0){
+    parts.push('<h3>남은 기간 '+won(cmp.amount)+'을 더 쓴다면</h3>');
+    parts.push('<table><thead><tr><th>어디에 쓰나</th><th>늘어나는 공제액</th><th>예상 공제액</th></tr></thead><tbody>');
+    parts.push('<tr><td>신용카드 (일반)</td><td>'+won(cmp.credit.delta)+'</td><td>'+won(cmp.credit.result.deduction)+'</td></tr>');
+    parts.push('<tr><td>체크카드·현금영수증 (일반)</td><td>'+won(cmp.debit.delta)+'</td><td>'+won(cmp.debit.result.deduction)+'</td></tr>');
+    parts.push('<tr><td>전통시장</td><td>'+won(cmp.market.delta)+'</td><td>'+won(cmp.market.result.deduction)+'</td></tr>');
+    parts.push('<tr><td>대중교통</td><td>'+won(cmp.transit.delta)+'</td><td>'+won(cmp.transit.result.deduction)+'</td></tr>');
+    if(r.lowSalary){
+      parts.push('<tr><td>도서·공연 등 문화체육</td><td>'+won(cmp.culture.delta)+'</td><td>'+won(cmp.culture.result.deduction)+'</td></tr>');
+    }
+    parts.push('</tbody></table>');
+    if(cmp.generalWinner==='debit' && cmp.debit.delta>cmp.credit.delta){
+      parts.push('<p class="note">일반 소비만 비교하면, 이 금액을 체크카드·현금영수증으로 쓸 때 신용카드보다 공제액이 <b>'+won(cmp.debit.delta-cmp.credit.delta)+'</b> 더 커요. 포인트나 수수료는 넣지 않은 비교입니다.</p>');
+    }else if(cmp.generalWinner==='same' && cmp.credit.delta===0 && cmp.debit.delta===0){
+      parts.push('<p class="note">일반 신용카드와 체크카드로는 공제액이 더 늘지 않습니다.</p>');
+    }
+  }
+  return parts.join('');
+}
+function render(){
+  var p=inputs(), box=$('out');
+  var over=p.salary>C.SALARY_CUTOFF;
+  $('culturePayWrap').style.opacity=over?1:0.7;
+  var r=C.calc(p);
+  var extra=+$('extraSpend').value||0;
+  var cmp=C.compareExtra(p, extra);
+  var childLabel=r.children===0?'없음':(r.children===1?'1명':'2명 이상');
+  var status=r.exceedsThreshold
+    ?'<p class="ok">사용액 합계가 최저사용금액(총급여의 25%)을 넘었습니다.</p>'
+    :'<p class="bad">사용액 합계가 최저사용금액을 넘지 않아 공제액은 0원입니다. 법 제1항은 문턱을 <b>초과</b>해야 공제한다고 정합니다.</p>';
+  var reclass=r.cultureReclassified
+    ?'<p class="note">총급여가 7천만원을 넘어, 입력한 문화비 '+won(r.culture)+'은 별도 30%가 아니라 '+(r.culturePayMethod==='debit'?'체크카드·현금영수증 등(30%)':'신용카드(15%)')+' 사용분에 합쳐 계산했어요.</p>'
+    :'';
+  var subLabel={ga:'가목 (문턱 ≤ 신용카드사용분 → 문턱 × 15%)',na:'나목 (문턱이 신용과 체크·문화 사이에 있음)', 'da-low':'다목 (7천만원 이하, 문턱이 전통시장·대중교통까지 닿음)', 'da-high':'다목 (7천만원 초과, 문턱이 전통시장·대중교통까지 닿음)'}[r.subtractCase]||r.subtractCase;
+  box.innerHTML=
+    status+reclass+
+    '<div class="stats">'+
+    '<div class="stat"><b>'+won(r.threshold)+'</b><span>공제 문턱 (총급여 × 25%)</span></div>'+
+    '<div class="stat"><b>'+won(r.total)+'</b><span>공제 대상 사용액 합계</span></div>'+
+    '<div class="stat"><b>'+won(r.baseLimit)+'</b><span>기본한도 (자녀등 '+childLabel+')</span></div>'+
+    '<div class="stat"><b class="big">'+won(r.deduction)+'</b><span>소득공제액 (한도 적용 후)</span></div>'+
+    '</div>'+
+    '<h3>계산 과정</h3><table><tbody>'+
+    '<tr><td>신용카드사용분 × 15%</td><td>'+won(r.itemDeductions.credit)+'</td></tr>'+
+    '<tr><td>체크·현금영수증등 사용분 × 30%</td><td>'+won(r.itemDeductions.debit)+'</td></tr>'+
+    '<tr><td>문화체육사용분 × 30%'+(r.lowSalary?'':' (총급여 7천만원 초과라 0원)')+'</td><td>'+won(r.itemDeductions.culture)+'</td></tr>'+
+    '<tr><td>전통시장사용분 × 40%</td><td>'+won(r.itemDeductions.market)+'</td></tr>'+
+    '<tr><td>대중교통이용분 × 40%</td><td>'+won(r.itemDeductions.transit)+'</td></tr>'+
+    '<tr><th>항목별 공제액 합계</th><th>'+won(r.gross)+'</th></tr>'+
+    '<tr><td>문턱 차감 ('+subLabel+')</td><td>− '+won(r.subtract)+'</td></tr>'+
+    '<tr><th>한도 적용 전 공제액</th><th>'+(r.exceedsThreshold?won(r.preLimit):'0원 (문턱 미달)')+'</th></tr>'+
+    '<tr><td>기본한도</td><td>'+won(r.baseLimit)+'</td></tr>'+
+    '<tr><td>추가공제 (전통시장·대중교통'+(r.lowSalary?'·문화체육':'')+' / 한도 '+won(r.additionalCap)+')</td><td>'+won(r.additional)+'</td></tr>'+
+    '<tr><th>소득공제액</th><th>'+won(r.deduction)+'</th></tr>'+
+    '</tbody></table>'+
+    '<p class="note">소비증가분(제7호)은 2024년 귀속에만 해당되어 더하지 않았습니다. 원 미만이 생기면 임의로 반올림하지 않습니다.</p>'+
+    '<h3>남은 기간 신용카드 vs 체크카드</h3>'+
+    hintHtml(r,cmp)+
+    '<p class="note">정확한 금액은 국세청 홈택스에서 확인하세요.</p>'+SAMPLE_CTA;
+}
+['salary','children','credit','debit','market','transit','culture','culturePay','extraSpend'].forEach(function(i){
+  $(i).addEventListener('input',render);
+  $(i).addEventListener('change',render);
+});
+$('loadEx').addEventListener('click',loadExample);
+render();
+</script>
+</body>
+</html>
