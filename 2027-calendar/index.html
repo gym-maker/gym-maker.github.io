@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2027 Calendar with US Federal Holidays — Printable + PTO Planner</title>
+<meta name="description" content="Free printable 2027 calendar with all 11 US federal holidays and observed dates (Juneteenth Fri Jun 18, July 4 observed Mon Jul 5, Christmas observed Fri Dec 24). See 2027 long weekends and where 1–4 PTO days get you the longest break.">
+<link rel="canonical" href="https://gym-maker.github.io/2027-calendar/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#F5F0E8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2027 Calendar with US Federal Holidays + PTO Planner">
+<meta property="og:description" content="All 2027 federal holidays with observed dates, long weekends, and the best days to take PTO. Prints on one page.">
+<meta property="og:url" content="https://gym-maker.github.io/2027-calendar/">
+<meta property="og:image" content="https://gym-maker.github.io/2027-calendar/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/tools.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How many federal holidays are there in 2027?","acceptedAnswer":{"@type":"Answer","text":"There are 11 federal holidays in 2027. Three fall on a weekend and are observed on a weekday: Juneteenth (Saturday June 19, observed Friday June 18), Independence Day (Sunday July 4, observed Monday July 5) and Christmas (Saturday December 25, observed Friday December 24)."}},
+{"@type":"Question","name":"When is Thanksgiving 2027?","acceptedAnswer":{"@type":"Answer","text":"Thursday, November 25, 2027."}},
+{"@type":"Question","name":"Is December 31, 2027 a federal holiday?","acceptedAnswer":{"@type":"Answer","text":"Yes, for most federal employees. New Year's Day 2028 falls on a Saturday, so it is observed on Friday, December 31, 2027 under 5 U.S.C. 6103(b). OPM lists it with the 2028 holidays."}},
+{"@type":"Question","name":"How many working days are in 2027?","acceptedAnswer":{"@type":"Answer","text":"2027 has 261 weekdays. Subtracting the 11 federal holidays observed on weekdays leaves 250 working days, or 249 if you also count December 31 (New Year's Day 2028 observed)."}}
+]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<h1>2027 Calendar with US Federal Holidays</h1>
+<p class="lead">All 11 federal holidays with their <b>observed</b> dates, every long weekend, and the days where a little PTO buys the longest break. Prints on one A4 or Letter page.</p>
+</header>
+
+<section class="card">
+<div class="stats" id="stats"></div>
+<div class="row noprint" style="margin-top:12px">
+<button class="btn" onclick="window.print()">🖨 Print 2027 calendar</button>
+<button class="btn ghost" id="toggleLeave">Hide PTO suggestion</button>
+</div>
+</section>
+
+<section>
+<div class="legend noprint"><span><i style="background:var(--red-soft)"></i>Federal holiday (observed)</span><span><i style="background:var(--pine-soft);outline:1px dashed var(--pine)"></i>Suggested PTO</span><span><i style="border:2px solid var(--ink)"></i>Today</span></div>
+<div class="months" id="months" style="margin-top:8px"></div>
+</section>
+
+<section class="card noprint">
+<h2>Best days to take PTO in 2027 <span class="tag">auto</span></h2>
+<p class="note">Assumes a Monday–Friday job that gets federal holidays off. For each number of PTO days, these are the longest unbroken breaks. Tap a row to show it on the calendar. (2 or 3 PTO days mostly just stretch the same weekends, so we show the 1-day and 4-day picks.)</p>
+<div id="plans"></div>
+</section>
+
+<section class="card">
+<h2>2027 federal holidays</h2>
+<table><thead><tr><th>Holiday</th><th>Actual date</th><th>Observed (day off)</th></tr></thead><tbody id="hlist"></tbody></table>
+<p class="note">* Observed for most federal employees. Banks, schools and private employers may follow their own schedule.</p>
+</section>
+
+<section class="card">
+<h2>2027 long weekends</h2>
+<table><thead><tr><th>Dates</th><th>Days</th></tr></thead><tbody id="runs"></tbody></table>
+</section>
+
+<section class="card faq">
+<h2>FAQ</h2>
+<details open><summary>How many federal holidays are there in 2027?</summary><p>11. Three land on a weekend and move: Juneteenth (Sat Jun 19 → <b>Fri Jun 18</b>), Independence Day (Sun Jul 4 → <b>Mon Jul 5</b>) and Christmas (Sat Dec 25 → <b>Fri Dec 24</b>).</p></details>
+<details><summary>When is Thanksgiving 2027?</summary><p>Thursday, November 25, 2027. Take Friday Nov 26 off and you get a 4-day weekend.</p></details>
+<details><summary>Is December 31, 2027 a day off?</summary><p>For most federal employees, yes. New Year's Day 2028 is a Saturday, so it's observed on Friday, December 31, 2027 (5 U.S.C. 6103(b)). OPM lists it with the 2028 holidays, so it's marked separately here.</p></details>
+<details><summary>How many working days are in 2027?</summary><p>2027 has 261 weekdays. Minus the 11 federal holidays observed on weekdays, that's <b>250 working days</b> (249 if you also take Dec 31 off).</p></details>
+<details><summary>Can I print it?</summary><p>Yes. Hit "Print 2027 calendar" and the page switches to a 12-month, one-page layout. Save as PDF from the print dialog if you want a file.</p></details>
+</section>
+
+<footer class="foot">
+<p><b>Sources</b>: <a href="https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/" target="_blank" rel="noopener">U.S. Office of Personnel Management, Federal Holidays (2027 schedule)</a> · 5 U.S.C. 6103 · Executive Order 11582. Checked November 15, 2026.</p>
+<p>Not legal or HR advice. Your employer's holiday calendar wins.</p>
+<p>Made with AI help by Send This Instead · <a href="../">More free tools</a> · <a href="https://3368936654923.gumroad.com/?utm_source=tools&utm_medium=2027-calendar" target="_blank" rel="noopener">Work email templates</a></p>
+<img class="px" src="https://hits.sh/gym-maker.github.io/2027-calendar.svg" alt="" aria-hidden="true">
+</footer>
+</div>
+<script src="../assets/cal.js"></script>
+<script>
+var LIST=[["New Year's Day","2027-01-01","2027-01-01"],["Birthday of Martin Luther King, Jr.","2027-01-18","2027-01-18"],["Washington's Birthday (Presidents' Day)","2027-02-15","2027-02-15"],["Memorial Day","2027-05-31","2027-05-31"],["Juneteenth","2027-06-19","2027-06-18"],["Independence Day","2027-07-04","2027-07-05"],["Labor Day","2027-09-06","2027-09-06"],["Columbus Day","2027-10-11","2027-10-11"],["Veterans Day","2027-11-11","2027-11-11"],["Thanksgiving Day","2027-11-25","2027-11-25"],["Christmas Day","2027-12-25","2027-12-24"]];
+var H={};LIST.forEach(function(x){H[x[2]]=x[0]+(x[1]!==x[2]?' (observed)':'')});
+var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function fs(d){return DOW[d.getDay()]+' '+MON[d.getMonth()].slice(0,3)+' '+d.getDate()}
+var c=YearCal({year:2027,holidays:H,extra:{"2027-12-31":"New Year's Day 2028 (observed)","2026-12-25":"Christmas"},maxLeave:4,perK:12,labels:{months:MON,dow:['S','M','T','W','T','F','S'],daySuffix:''},fmtDate:fs});
+var s=c.stats;
+document.getElementById('stats').innerHTML='<div class="stat"><b>11</b><span>federal holidays</span></div><div class="stat"><b>'+(s.workDays)+'</b><span>working days (Dec 31 off)</span></div><div class="stat"><b>'+c.runs.length+'</b><span>3+ day weekends</span></div><div class="stat"><b>Nov 25</b><span>Thanksgiving</span></div>';
+document.getElementById('hlist').innerHTML=LIST.map(function(x){var a=new Date(x[1]+'T00:00:00'),o=new Date(x[2]+'T00:00:00');return '<tr><td>'+x[0]+'</td><td>'+fs(a)+'</td><td>'+(x[1]!==x[2]?'<b>'+fs(o)+'</b> *':fs(o))+'</td></tr>'}).join('')+'<tr><td>New Year\'s Day 2028</td><td>Sat Jan 1, 2028</td><td><b>Fri Dec 31, 2027</b> *</td></tr>';
+document.getElementById('runs').innerHTML=c.runs.map(function(r){return '<tr><td>'+fs(c.days[r.a].d)+' – '+fs(c.days[r.b].d)+'</td><td>'+r.len+' days</td></tr>'}).join('');
+var all=[],ph='';[1,4].forEach(function(k){ph+='<h3>'+k+' PTO day'+(k>1?'s':'')+'</h3><table><tbody>';c.plans[k].forEach(function(p){var id=all.length;all.push(p);ph+='<tr data-p="'+id+'" style="cursor:pointer"><td><b>'+p.len+' days</b> off</td><td>'+fs(c.days[p.a].d)+' – '+fs(c.days[p.b].d)+'</td><td class="note">PTO: '+p.leave.map(function(i){return fs(c.days[i].d)}).join(', ')+'</td></tr>'});ph+='</tbody></table>';});
+document.getElementById('plans').innerHTML=ph;
+var showLeave=true,sel=null;
+function leaveSet(){var o={};if(!showLeave||sel===null)return o;all[sel].leave.forEach(function(i){o[c.days[i].k]=1});return o}
+function draw(){c.render(document.getElementById('months'),leaveSet())}
+document.getElementById('plans').addEventListener('click',function(e){var tr=e.target.closest('tr[data-p]');if(!tr)return;sel=+tr.getAttribute('data-p');showLeave=true;document.getElementById('toggleLeave').textContent='Hide PTO suggestion';draw();document.getElementById('months').scrollIntoView({behavior:'smooth'})});
+document.getElementById('toggleLeave').addEventListener('click',function(){if(sel===null)sel=0;showLeave=!showLeave||sel===null;this.textContent=showLeave?'Hide PTO suggestion':'Show PTO suggestion';draw()});
+var best=0;all.forEach(function(p,i){if(p.len/p.k>all[best].len/all[best].k)best=i});sel=all.length?best:null;draw();
+</script>
+</body>
+</html>
