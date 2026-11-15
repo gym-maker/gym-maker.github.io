@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2027 연봉 실수령액 계산기 — 4대보험·소득세 공제 후 월급</title>
+<meta name="description" content="2027년 연봉·월급을 넣으면 국민연금, 건강보험, 장기요양, 고용보험, 근로소득세(간이세액표), 지방소득세와 월 실수령액을 계산해요. 공식 발표 요율만 쓰고, 미확정 항목은 따로 표시해요.">
+<link rel="canonical" href="https://gym-maker.github.io/2027-take-home-pay/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#F5F0E8">
+<meta property="og:type" content="website"><meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="2027 연봉 실수령액 계산기">
+<meta property="og:description" content="공식 요율과 국세청 근로소득 간이세액표로 4대보험·세금 공제 후 월급을 계산해요. 참고용 추정입니다.">
+<meta property="og:url" content="https://gym-maker.github.io/2027-take-home-pay/">
+<meta property="og:image" content="https://gym-maker.github.io/2027-take-home-pay/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/tools.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"2027년 연봉 실수령액은 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"세전 월급에서 비과세액을 뺀 금액(보수월액)에 4대보험 근로자 부담을 매기고, 같은 금액으로 근로소득 간이세액표의 소득세와 그 10%인 지방소득세를 뺀 값이 월 실수령액입니다. 이 계산기는 참고용 추정입니다."}},
+{"@type":"Question","name":"2027년 4대보험 요율은 확정됐나요?","acceptedAnswer":{"@type":"Answer","text":"국민연금 근로자 부담 5.0%는 국민연금법 부칙에 정해져 있고, 건강보험 7.19%(근로자 3.595%)는 2026.9.8 건강보험정책심의위원회에서 동결, 장기요양은 2026.10.30 장기요양위원회에서 건강보험료의 13.90%로 의결됐습니다. 고용보험 실업급여 근로자 부담은 2027년 하위법령 개정 전이므로 현행 0.9%(2026년 요율)를 쓰고, 확정되면 갱신합니다."}},
+{"@type":"Question","name":"부양가족 수에는 누구를 넣나요?","acceptedAnswer":{"@type":"Answer","text":"본인을 포함해 기본공제 대상 가족 수를 넣습니다. 배우자도 1명으로 셉니다. 간이세액표의 추가 공제는 공제대상가족 중 8세 이상 20세 이하 자녀에게만 적용됩니다."}},
+{"@type":"Question","name":"식대 비과세는 얼마까지인가요?","acceptedAnswer":{"@type":"Answer","text":"소득세법 제12조에 따라, 사내급식 등을 받지 않는 근로자가 받는 식사대는 월 20만원까지 비과세입니다. 기본값도 20만원이고, 회사에서 식대를 따로 주지 않으면 0으로 넣으면 됩니다."}}
+]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<h1>2027 연봉 실수령액 계산기</h1>
+<p class="lead">연봉이나 월급을 넣으면 4대보험과 세금(근로소득 간이세액표)을 뺀 월 실수령액을 계산해요. <b>참고용 추정</b>이며, 회사 급여 구성·원천징수 비율·실제 기준소득월액에 따라 명세서와 달라질 수 있어요.</p>
+</header>
+
+<section class="card">
+<div class="stats">
+<div class="stat"><b>5.0%</b><span>국민연금 근로자 (2027 확정)</span></div>
+<div class="stat"><b>3.595%</b><span>건강보험 근로자 (2027 동결)</span></div>
+<div class="stat"><b>13.90%</b><span>장기요양 (2027, 건보료 대비)</span></div>
+<div class="stat"><b>0.9%</b><span>고용보험 근로자 (2026년 요율)</span></div>
+</div>
+</section>
+
+<section class="card">
+<h2>내 급여로 계산</h2>
+<div class="two">
+<div>
+<label class="f" for="mode">입력 기준</label>
+<select id="mode">
+<option value="annual">연봉 (세전, 퇴직금 별도)</option>
+<option value="monthly">월급 (세전)</option>
+</select>
+</div>
+<div>
+<label class="f" id="payLab" for="pay">연봉 (원)</label>
+<input id="pay" type="number" inputmode="numeric" value="36000000" min="0" step="10000">
+</div>
+</div>
+<div class="two">
+<div>
+<label class="f" for="taxfree">비과세액 (월, 원)</label>
+<input id="taxfree" type="number" inputmode="numeric" value="200000" min="0" step="10000">
+<p class="note" style="margin:6px 0 0">기본값 200,000원은 식대 비과세 한도(소득세법 제12조)예요. 식대를 안 받으면 0으로 넣으세요.</p>
+</div>
+<div>
+<label class="f" for="family">부양가족 수 (본인 포함)</label>
+<input id="family" type="number" inputmode="numeric" value="1" min="1" max="20" step="1">
+<label class="f" for="kids">8세 이상 20세 이하 자녀 수</label>
+<input id="kids" type="number" inputmode="numeric" value="0" min="0" max="19" step="1">
+<p class="note" style="margin:6px 0 0">간이세액표 추가 공제는 8세 이상 20세 이하 자녀에게만 적용돼요. 자녀는 부양가족 수에 포함해서 세세요.</p>
+</div>
+</div>
+<div id="out" class="result" style="margin-top:14px"></div>
+</section>
+
+<section class="card">
+<h2>연봉별 월 실수령액 표</h2>
+<p class="note">위 입력과 같은 비과세·부양가족·자녀 수를 기준으로, 연봉 2,400만~1억 원을 100만 원 단위로 계산한 값이에요. 지금 넣은 연봉과 가장 가까운 칸을 강조해요.</p>
+<div id="tbl" style="overflow-x:auto"></div>
+</section>
+
+<section class="card">
+<h2>이 계산기가 쓰는 요율</h2>
+<table>
+<thead><tr><th>항목</th><th>근로자 부담</th><th>기준·상태</th></tr></thead>
+<tbody>
+<tr><td>국민연금</td><td>5.0% (전체 10.0%의 절반)</td><td>2027년 확정. 국민연금법 부칙 제4조. 기준소득월액 하한 41만·상한 659만 원(2026.7~2027.6 고시, 2027.7 이후는 새 고시 시 갱신)</td></tr>
+<tr><td>건강보험</td><td>3.595% (전체 7.19%의 절반)</td><td>2027년 확정(동결). 2026.9.8 건강보험정책심의위원회. 보수월액 상·하한은 2026년 고시 기준(보험료 본인부담 월 10,080~4,591,740원), 2027년 고시 확인 시 갱신</td></tr>
+<tr><td>장기요양보험</td><td>건강보험료의 13.90% (소득 대비 0.9994%)</td><td>2026.10.30 장기요양위원회 의결. 시행령 개정·공포문을 기준으로 필요하면 갱신</td></tr>
+<tr><td>고용보험 (실업급여)</td><td>0.9%</td><td><b>2026년 요율 기준, 2027 확정 시 갱신.</b> 현행 고용산재보험료징수법 시행령은 실업급여 1.8%·근로자 그 절반. 고용노동부 2026.9.1 개편 방안의 2.0%(근로자 1.0%) 인상은 하위법령 개정 전</td></tr>
+<tr><td>근로소득세</td><td>간이세액표</td><td>소득세법 시행령 별표 2(개정 2026.2.27, 2026.3 지급분부터). 2027년 표가 따로 개정되면 갱신</td></tr>
+<tr><td>지방소득세</td><td>소득세의 10%</td><td>지방세법 개인지방소득세 표준세율</td></tr>
+</tbody>
+</table>
+<p class="note">4대보험은 비과세를 뺀 보수월액에 요율을 곱한 뒤 10원 미만을 버립니다. 국민연금 기준소득월액은 1,000원 미만을 버린 뒤 상·하한 안으로 맞춥니다. 연봉을 넣으면 월급은 연봉÷12의 원 단위 절사예요. 월급을 직접 넣을 수도 있어요.</p>
+</section>
+
+<section class="card faq">
+<h2>자주 묻는 질문</h2>
+<details open>
+<summary>이 금액이 실제 월급명세서와 다를 수 있나요?</summary>
+<p>있어요. 이 계산기는 참고용 추정이에요. 회사의 식대·자가운전보조금 같은 비과세 항목, 원천징수 세액의 80%·100%·120% 선택, 국민연금 기준소득월액(전년도 소득으로 정해지는 경우), 상여 지급 방식에 따라 명세서와 달라집니다. 정확한 금액은 급여명세서나 국세청·4대보험 공단 안내가 우선이에요.</p>
+</details>
+<details>
+<summary>2027년 요율은 모두 확정됐나요?</summary>
+<p>국민연금 5.0%, 건강보험 3.595%, 장기요양(건보료의 13.90%)은 법령 또는 공식 위원회에서 정해졌어요. 고용보험 근로자 부담은 2027년 하위법령이 아직 바뀌지 않아 현행 0.9%를 쓰고, 페이지에 그 사실을 밝혀 두었어요. 국민연금 상·하한(41만~659만 원)은 2027년 6월분까지 적용되고, 7월분부터는 새 고시를 따릅니다.</p>
+</details>
+<details>
+<summary>부양가족 수에는 누구를 넣나요?</summary>
+<p>본인을 꼭 포함해서, 기본공제 대상 가족 수를 넣어요. 배우자도 1명으로 세요. 연 소득 요건을 넘는 가족은 빼야 해요. 8세 이상 20세 이하 자녀가 있으면 해당 칸에 그 수를 따로 넣어요. 이 추가 공제는 간이세액표 제3호의 월 공제액(1명 20,830원, 2명 45,830원, 3명 이상 45,830원+1명당 33,330원)이에요.</p>
+</details>
+<details>
+<summary>연말정산 결과와 왜 달라지나요?</summary>
+<p>매달 떼는 세금은 간이세액표로 대략 미리 걷는 금액이에요. 신용카드, 의료비, 주택자금, 연금계좌 같은 공제는 연말정산에서 반영되므로 12월 급여 또는 환급·추납과 이 계산기의 월 추정은 다를 수 있어요.</p>
+</details>
+</section>
+
+<footer class="foot">
+<p><b>출처</b> (확인일 2026-11-15):
+<a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88%EB%B2%95" target="_blank" rel="noopener">국민연금법 부칙 제4조(2027년 사업장가입자 각 1만분의 500)</a> ·
+<a href="https://www.4insure.or.kr/pbiz/feii/inscIntroView.do" target="_blank" rel="noopener">4대사회보험 정보연계센터 보험료 소개(국민연금 2027 요율·기준소득월액 41만~659만 원, 건강보험 2026 보수월액 상·하한, 고용보험 실업급여 0.9%)</a> ·
+<a href="https://www.law.go.kr/admRulLsInfoR.do?admRulSeq=2100000274228" target="_blank" rel="noopener">보건복지부고시 제2026-31호(기준소득월액, 2026.7~2027.6)</a> ·
+<a href="https://www.korea.kr/briefing/policyBriefingView.do?newsId=156780681" target="_blank" rel="noopener">정책브리핑 제15차 건강보험정책심의위원회(2026.9.8) 2027 건강보험료율 7.19% 동결</a> ·
+<a href="https://www.mohw.go.kr/gallery.es?act=view&amp;b_list=12&amp;bid=0003&amp;list_no=380579&amp;mid=a10606030000" target="_blank" rel="noopener">보건복지부 제5차 장기요양위원회(2026.10.30) 2027 장기요양보험료율 0.9994%·건보료 대비 13.90%</a> ·
+<a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B3%A0%EC%9A%A9%EC%82%B0%EC%9E%AC%EB%B3%B4%ED%97%98%EB%A3%8C%EC%A7%95%EC%88%98%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A0%A1" target="_blank" rel="noopener">고용산재보험료징수법 제13조·같은 법 시행령(실업급여 1천분의 18)</a> ·
+<a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%86%8C%EB%93%9D%EC%84%B8%EB%B2%95%EC%8B%9C%ED%96%89%EB%A0%B9" target="_blank" rel="noopener">소득세법 시행령 별표 2 근로소득 간이세액표(개정 2026.2.27)</a> ·
+<a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7873&amp;mi=2227" target="_blank" rel="noopener">국세청 종합소득 기본세율(소득세법 제55조)</a> ·
+<a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%86%8C%EB%93%9D%EC%84%B8%EB%B2%95" target="_blank" rel="noopener">소득세법 제12조(식사대 월 20만원 이하 비과세)</a> ·
+<a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A7%80%EB%B0%A9%EC%84%B8%EB%B2%95" target="_blank" rel="noopener">지방세법(개인지방소득세 소득세의 10%)</a>
+</p>
+<p><b>안내</b>: 참고용 계산기예요. 숫자를 지어내지 않았고, 2027년 요율이 아직 없는 항목은 최신 공식 요율을 쓰며 그 사실을 적었어요. 법적 판단이나 정확한 원천징수 세액은 국세청 홈택스·손택스 간이세액표, 4대보험 공단, 회사 급여담당자에게 확인하세요. 마지막 확인 2026-11-15.</p>
+<p>AI 도움을 받아 만들었어요 · <a href="../">Send This Instead 무료 도구 모음</a> · <a href="../2027-minimum-wage/">2027 최저시급 계산기</a></p>
+<img class="px" src="https://hits.sh/gym-maker.github.io/2027-take-home-pay.svg" alt="" aria-hidden="true">
+</footer>
+</div>
+<script src="ganse-table.js"></script>
+<script>
+function $(i){return document.getElementById(i)}
+function won(n){return Math.round(n).toLocaleString('ko-KR')+'원'}
+function floor10(n){return Math.floor(n/10)*10}
+function rate(amount, numer, denom){return floor10(Math.floor(amount*numer/denom))}
+function incomeTax(monthly, family, kids){
+  family=Math.max(1, family|0); kids=Math.max(0, kids|0);
+  if(kids>family-1) kids=Math.max(0,family-1);
+  var T=window.GANSE_TABLE;
+  function col(fam,m){
+    fam=Math.min(Math.max(fam,1),11);
+    if(m>=10000000){
+      var base=T.at10000[fam-1];
+      if(m<=14000000) return base+Math.floor((m-10000000)*0.98*0.35)+25000;
+      if(m<=28000000) return base+1397000+Math.floor((m-14000000)*0.98*0.38);
+      if(m<=30000000) return base+6610600+Math.floor((m-28000000)*0.98*0.40);
+      if(m<=45000000) return base+7394600+Math.floor((m-30000000)*0.40);
+      if(m<=87000000) return base+13394600+Math.floor((m-45000000)*0.42);
+      return base+31034600+Math.floor((m-87000000)*0.45);
+    }
+    var th=m/1000, rows=T.rows;
+    for(var i=0;i<rows.length;i++){
+      if(rows[i][0]<=th && th<rows[i][1]) return rows[i][1+fam];
+    }
+    return 0;
+  }
+  var tax;
+  if(family<=11) tax=col(family,monthly);
+  else tax=col(11,monthly)-(col(10,monthly)-col(11,monthly))*(family-11);
+  var cred=0;
+  if(kids===1) cred=20830;
+  else if(kids===2) cred=45830;
+  else if(kids>=3) cred=45830+(kids-2)*33330;
+  return Math.max(0, tax-cred);
+}
+function calcAll(monthly, taxfree, family, kids){
+  monthly=Math.max(0, Math.floor(monthly||0));
+  taxfree=Math.max(0, Math.floor(taxfree||0));
+  var taxable=Math.max(0, monthly-taxfree), nps=0, hi=0, ltc=0, ei=0, it=0, lt=0;
+  if(taxable>0){
+    var base=Math.min(Math.max(Math.floor(taxable/1000)*1000, 410000), 6590000);
+    nps=rate(base,5,100);
+    var rem=Math.min(Math.max(taxable,280667),127725731);
+    hi=rate(rem,3595,100000);
+    hi=Math.min(Math.max(hi,10080),4591740);
+    ltc=rate(hi,1390,10000);
+    ei=rate(taxable,9,1000);
+    it=incomeTax(taxable,family,kids);
+    lt=floor10(it*0.1);
+  }
+  var ins=nps+hi+ltc+ei, tax=it+lt;
+  return {monthly:monthly,taxable:taxable,nps:nps,hi:hi,ltc:ltc,ei:ei,ins:ins,it:it,lt:lt,tax:tax,net:monthly-ins-tax};
+}
+function inputs(){
+  var mode=$('mode').value, raw=+$('pay').value||0, monthly, annual;
+  if(mode==='annual'){ annual=Math.floor(raw); monthly=Math.floor(annual/12); }
+  else { monthly=Math.floor(raw); annual=monthly*12; }
+  return {mode:mode, annual:annual, monthly:monthly, taxfree:+$('taxfree').value||0, family:Math.max(1,+$('family').value||1), kids:Math.max(0,+$('kids').value||0)};
+}
+function render(){
+  $('payLab').textContent=$('mode').value==='annual'?'연봉 (원)':'월급 (원)';
+  var p=inputs(), warn='';
+  if(p.kids>p.family-1){
+    warn='<p class="note">8세 이상 20세 이하 자녀 수는 본인을 뺀 부양가족 수를 넘을 수 없어, '+(p.family-1)+'명으로 계산했어요.</p>';
+  }
+  var r=calcAll(p.monthly,p.taxfree,p.family,p.kids);
+  $('out').innerHTML=warn+
+    '<div class="stats">'+
+    '<div class="stat"><b>'+won(r.monthly)+'</b><span>세전 월급'+(p.mode==='annual'?' (연봉÷12)':'')+'</span></div>'+
+    '<div class="stat"><b>'+won(r.taxable)+'</b><span>과세·보험 기준 (비과세 제외)</span></div>'+
+    '<div class="stat"><b>'+won(r.ins+r.tax)+'</b><span>공제 합계</span></div>'+
+    '<div class="stat"><b class="big">'+won(r.net)+'</b><span>월 실수령액 (추정)</span></div>'+
+    '</div>'+
+    '<h3>월 공제 내역</h3><table><tbody>'+
+    '<tr><td>국민연금 5.0% (기준소득월액 41만~659만 원)</td><td>'+won(r.nps)+'</td></tr>'+
+    '<tr><td>건강보험 3.595%</td><td>'+won(r.hi)+'</td></tr>'+
+    '<tr><td>장기요양 (건보료 × 13.90%)</td><td>'+won(r.ltc)+'</td></tr>'+
+    '<tr><td>고용보험 0.9% <span class="tag">2026년 요율</span></td><td>'+won(r.ei)+'</td></tr>'+
+    '<tr><td>근로소득세 (간이세액표)</td><td>'+won(r.it)+'</td></tr>'+
+    '<tr><td>지방소득세 (소득세의 10%)</td><td>'+won(r.lt)+'</td></tr>'+
+    '<tr><th>공제 합계</th><th>'+won(r.ins+r.tax)+'</th></tr>'+
+    '<tr><th>월 실수령액 (추정)</th><th>'+won(r.net)+'</th></tr>'+
+    '<tr><td>연 실수령 환산 (월×12)</td><td>'+won(r.net*12)+'</td></tr>'+
+    '</tbody></table>'+
+    '<p class="note">고용보험은 2027년 하위법령 개정 전이라 현행 0.9%를 썼어요. 국민연금 상한(659만 원)은 2027년 6월분까지 적용돼요.</p>';
+  var html='<table><thead><tr><th>연봉</th><th>세전 월급</th><th>4대보험</th><th>소득세+지방세</th><th>월 실수령액</th></tr></thead><tbody>';
+  var near=0, best=1e18;
+  for(var a=24000000;a<=100000000;a+=1000000){
+    var d=Math.abs(a-p.annual); if(d<best){best=d;near=a;}
+  }
+  for(var a=24000000;a<=100000000;a+=1000000){
+    var row=calcAll(Math.floor(a/12),p.taxfree,p.family,p.kids);
+    var mark=a===near?' style="background:var(--pine-soft)"':'';
+    html+='<tr'+mark+'><td>'+(a/10000).toLocaleString('ko-KR')+'만 원</td><td>'+won(row.monthly)+'</td><td>'+won(row.ins)+'</td><td>'+won(row.tax)+'</td><th>'+won(row.net)+'</th></tr>';
+  }
+  html+='</tbody></table>';
+  $('tbl').innerHTML=html;
+}
+['mode','pay','taxfree','family','kids'].forEach(function(i){$(i).addEventListener('input',render);$(i).addEventListener('change',render);});
+render();
+</script>
+</body>
+</html>
