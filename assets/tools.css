@@ -22,7 +22,7 @@ table{width:100%;border-collapse:collapse;font-size:.95rem}th,td{padding:7px 6px
 .btn{appearance:none;border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:10px;padding:10px 14px;font:inherit;font-weight:600;cursor:pointer}
 .btn.ghost{background:transparent;color:var(--ink)}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-label.f{display:block;font-weight:600;margin:10px 0 4px}input[type=number],input[type=text],select{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}
+label.f{display:block;font-weight:600;margin:10px 0 4px}input[type=number],input[type=text],input[type=date],select{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:560px){.two{grid-template-columns:1fr}}
 .result{font-size:1.05rem}.big{font-size:1.8rem;font-weight:800;color:var(--pine)}
 .note{font-size:.85rem;color:var(--mute)}
