@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thanksgiving Turkey Calculator — Size, Thaw Time, and Roast Time (USDA)</title>
+<meta name="description" content="Free Thanksgiving turkey calculator using USDA FSIS figures. Enter guests, whole or breast, stuffed or not, and dinner time. Get turkey size in pounds, fridge and cold-water thaw times, the date to start thawing, roasting time at 325°F, 165°F safe temperature, and when to put it in the oven. U.S. Thanksgiving is Thursday, November 26, 2026.">
+<link rel="canonical" href="https://gym-maker.github.io/turkey-calculator/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#F5F0E8">
+<meta property="og:type" content="website"><meta property="og:locale" content="en_US">
+<meta property="og:title" content="Thanksgiving Turkey Calculator (USDA)">
+<meta property="og:description" content="How big a turkey, when to thaw it, how long to roast at 325°F, and when to start cooking. USDA FSIS figures. Thanksgiving 2026 is Thursday, November 26.">
+<meta property="og:url" content="https://gym-maker.github.io/turkey-calculator/">
+<meta property="og:image" content="https://gym-maker.github.io/turkey-calculator/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/tools.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How big a turkey do I need per person?","acceptedAnswer":{"@type":"Answer","text":"USDA FSIS says to allow 1 pound of turkey per person for a fresh or frozen turkey. USDA does not publish a leftovers amount. If you want leftovers, this calculator uses Butterball's figure of about 1.5 pounds per person, from the Butterball Togetherness Report 2025, and cites it on the page."}},
+{"@type":"Question","name":"How long does a turkey take to thaw in the refrigerator?","acceptedAnswer":{"@type":"Answer","text":"USDA FSIS says to allow about 24 hours for every 4 to 5 pounds, in a refrigerator at 40°F or below. The official chart is 1 to 3 days for 4 to 12 pounds, 3 to 4 days for 12 to 16 pounds, 4 to 5 days for 16 to 20 pounds, and 5 to 6 days for 20 to 24 pounds. Keep the turkey in its wrapper on a tray. A thawed turkey can stay in the refrigerator 1 to 2 days."}},
+{"@type":"Question","name":"How long does a turkey take to cook at 325°F?","acceptedAnswer":{"@type":"Answer","text":"Times are approximate and depend on weight and whether the bird is stuffed. For example, an unstuffed 8 to 12 pound turkey takes about 2¾ to 3 hours at 325°F. Always use a food thermometer. The turkey is safe at a minimum internal temperature of 165°F in the innermost part of the thigh and wing and the thickest part of the breast. If stuffed, the center of the stuffing must also reach 165°F. USDA recommends cooking stuffing in a casserole for optimum safety."}},
+{"@type":"Question","name":"When is Thanksgiving 2026?","acceptedAnswer":{"@type":"Answer","text":"U.S. Thanksgiving in 2026 is Thursday, November 26."}}
+]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<h1>Thanksgiving Turkey Calculator</h1>
+<p class="lead">How big a turkey, when to thaw it, how long to roast it at 325°F, and what time to start cooking. Figures come from <b>USDA FSIS</b> (and Butterball only for leftover size). Times are approximate — always use a food thermometer. U.S. Thanksgiving 2026 is <b>Thursday, November 26</b>.</p>
+</header>
+
+<section class="card">
+<div class="stats">
+<div class="stat"><b>1 lb</b><span>Per person (USDA, no leftovers)</span></div>
+<div class="stat"><b>24 hr / 4–5 lb</b><span>Refrigerator thaw (40°F or below)</span></div>
+<div class="stat"><b>30 min / lb</b><span>Cold-water thaw</span></div>
+<div class="stat"><b>165°F</b><span>Safe minimum internal temperature</span></div>
+</div>
+</section>
+
+<section class="card">
+<h2>Plan your bird</h2>
+<p class="note">The first values are a sample Thanksgiving dinner: 8 guests, a whole unstuffed turkey, served at 3:00 p.m. on November 26, 2026. Change anything and the plan updates.</p>
+<div class="two">
+<div>
+<label class="f" for="guests">Number of guests</label>
+<input id="guests" type="number" inputmode="numeric" min="1" step="1" value="8">
+</div>
+<div>
+<label class="f" for="leftovers">Leftovers</label>
+<select id="leftovers">
+<option value="no" selected>No — USDA 1 lb per person</option>
+<option value="yes">Yes — Butterball about 1.5 lb per person</option>
+</select>
+<p class="note" style="margin:6px 0 0">USDA does not publish a leftovers multiplier. The “yes” option uses Butterball’s “about 1.5 lbs. per person,” cited below.</p>
+</div>
+</div>
+<div class="two">
+<div>
+<label class="f" for="kind">Turkey type</label>
+<select id="kind">
+<option value="whole" selected>Whole turkey</option>
+<option value="breast">Turkey breast</option>
+</select>
+</div>
+<div>
+<label class="f" for="stuffed">Stuffed?</label>
+<select id="stuffed">
+<option value="no" selected>No (recommended for safety)</option>
+<option value="yes">Yes, stuffed</option>
+</select>
+<p class="note" style="margin:6px 0 0">USDA does not recommend stuffing a turkey for optimum safety. Cook stuffing in a casserole instead. If you do stuff the bird, the stuffing must also reach 165°F.</p>
+</div>
+</div>
+<div class="two">
+<div>
+<label class="f" for="dinnerDate">Dinner date</label>
+<input id="dinnerDate" type="date" value="2026-11-26" required>
+</div>
+<div>
+<label class="f" for="dinnerTime">Dinner time</label>
+<input id="dinnerTime" type="time" value="15:00" required>
+</div>
+</div>
+<div id="out" class="result" style="margin-top:14px"></div>
+</section>
+
+<section class="card">
+<h2>The figures this calculator uses</h2>
+<table>
+<thead><tr><th>Item</th><th>Source and rule</th></tr></thead>
+<tbody>
+<tr><td>Size</td><td>USDA: 1 pound per person (fresh or frozen turkey). Leftovers: Butterball about 1.5 pounds per person. Frozen pre-stuffed turkeys (USDA 1¼ lb, cook from frozen) are not calculated here.</td></tr>
+<tr><td>Refrigerator thaw</td><td>About 24 hours for every 4 to 5 pounds, at 40°F or below, plus the USDA day chart for 4–24 lb. The “move to the fridge” date uses the longer end of the chart so the turkey is ready. A thawed turkey may stay in the refrigerator 1 to 2 days.</td></tr>
+<tr><td>Cold-water thaw</td><td>About 30 minutes per pound. Keep it wrapped, change the water every 30 minutes, and cook immediately. Do not refreeze.</td></tr>
+<tr><td>Roast time</td><td>325°F, USDA timetables by weight, stuffed or unstuffed. These times are approximate.</td></tr>
+<tr><td>Safe temperature</td><td>165°F in the innermost thigh and wing and the thickest part of the breast. Stuffing must also reach 165°F.</td></tr>
+<tr><td>Start-cooking time</td><td>Dinner time, minus the USDA roast window, minus the 20-minute rest USDA recommends before carving. The earlier time in the window is the safer start.</td></tr>
+</tbody>
+</table>
+<p class="note">If the calculated weight is outside the USDA 4–24 lb thaw chart or the matching roast chart, this page will not invent a roast time. It will still show the 24-hour-per-4-to-5-pound and 30-minutes-per-pound formulas.</p>
+</section>
+
+<section class="card faq">
+<h2>Frequently asked questions</h2>
+<details open>
+<summary>Are these times a guarantee that the turkey is done?</summary>
+<p>No. USDA says the timetables are approximate. Always use a food thermometer. The turkey is safe only when it reaches 165°F in the innermost part of the thigh and wing and the thickest part of the breast.</p>
+</details>
+<details>
+<summary>When should I move a frozen turkey to the fridge?</summary>
+<p>This page uses the longer end of the USDA refrigerator chart for the bird’s weight (for example, 3 days for 4–12 lb). Put it in the refrigerator on that date, still in its wrapper, on a tray. If it thaws early, USDA says a thawed turkey can remain in the refrigerator 1 to 2 days.</p>
+</details>
+<details>
+<summary>Should I stuff the turkey?</summary>
+<p>USDA does not recommend stuffing a turkey for optimum safety. Cook stuffing in a casserole. If you stuff the bird, mix wet and dry ingredients just before filling the cavities loosely, cook immediately, and check that the center of the stuffing reaches 165°F.</p>
+</details>
+<details>
+<summary>What if my turkey is bigger than 24 pounds?</summary>
+<p>The USDA thaw and roast charts on this page go up to 24 pounds. We do not invent times beyond the chart. You can still use “about 24 hours for every 4 to 5 pounds” and “about 30 minutes per pound” for thawing. For roasting, call the USDA Meat and Poultry Hotline at 1-888-674-6854, or follow the package.</p>
+</details>
+</section>
+
+<footer class="foot">
+<p><b>Sources</b> (checked 2026-11-16):
+<a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/poultry/lets-talk-turkey-roasting" target="_blank" rel="noopener">USDA FSIS, Let’s Talk Turkey — A Consumer Guide to Safely Roasting a Turkey</a> (updated Nov 17, 2023) ·
+<a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/poultry/turkey-basics-safe-cooking" target="_blank" rel="noopener">USDA FSIS, Turkey Basics: Safe Cooking</a> ·
+<a href="https://www.butterball.com/sites/butterball/files/2025-09/Togetherness%20Report%202025%20Thanksgiving_Final_090925%5B76%5D.pdf" target="_blank" rel="noopener">Butterball Togetherness Report 2025</a> (leftover size only: “about 1.5 lbs. per person”)
+</p>
+<p><b>Note:</b> This is a planning tool, not a substitute for a food thermometer. Roast times are approximate. USDA does not publish a leftovers multiplier; the leftovers toggle uses Butterball’s figure and says so. A 6–8 lb stuffed breast uses the Let’s Talk Turkey time (2½ to 3½ hours); foodsafety.gov lists 3 to 3½ hours for that row — this page follows FSIS. Made with AI help. Last checked 2026-11-16.</p>
+<p>Made with AI help · <a href="../">Free tools from Send This Instead</a> · <a href="../secret-santa/">Secret Santa Generator</a> · <a href="../2027-calendar/">2027 US holiday calendar</a></p>
+<p class="note noprint tool-cta">If you write work emails in English, there is a free 5-template sample you can download: <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=turkey-calculator" target="_blank" rel="noopener">Send This Instead — free sample</a></p>
+<img class="px" src="https://hits.sh/gym-maker.github.io/turkey-calculator.svg" alt="" aria-hidden="true">
+</footer>
+</div>
+<script src="turkey.js"></script>
+<script>
+var SAMPLE_CTA='<p class="note noprint tool-cta">If you write work emails in English, there is a free 5-template sample you can download: <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=turkey-calculator" target="_blank" rel="noopener">Send This Instead — free sample</a></p>';
+function $(i){return document.getElementById(i)}
+var T=window.TurkeyCalc;
+function prettyDate(o){
+  if(!o) return '—';
+  return new Date(Date.UTC(o.y,o.m-1,o.d)).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric',timeZone:'UTC'});
+}
+function clockLabel(c, dinner){
+  if(!c) return '—';
+  var t=c.hhmm;
+  var h=+t.slice(0,2), m=t.slice(3);
+  var ampm=h>=12?'p.m.':'a.m.';
+  var h12=h%12; if(h12===0) h12=12;
+  var s=h12+':'+m+' '+ampm;
+  if(c.dayOffset===-1) s+=' the day before';
+  else if(c.dayOffset===1) s+=' the next day';
+  else if(c.dayOffset<-1||c.dayOffset>1) s+=' ('+(c.dayOffset>0?'+':'')+c.dayOffset+' day'+(Math.abs(c.dayOffset)===1?'':'s')+')';
+  return s;
+}
+function lb(n){
+  if(!isFinite(n)) return '—';
+  if(Math.abs(n-Math.round(n))<1e-9) return Math.round(n)+' lb';
+  return (Math.round(n*10)/10)+' lb';
+}
+function inputs(){
+  return {
+    guests:+$('guests').value||0,
+    leftovers:$('leftovers').value==='yes',
+    kind:$('kind').value,
+    stuffed:$('stuffed').value==='yes',
+    dinnerDate:$('dinnerDate').value,
+    dinnerTime:$('dinnerTime').value
+  };
+}
+function render(){
+  var p=inputs(), box=$('out');
+  if(p.guests<1){
+    box.innerHTML='<p class="bad">Enter at least one guest.</p>';
+    return;
+  }
+  if(!T.parseYMD(p.dinnerDate)||!T.parseTime(p.dinnerTime)){
+    box.innerHTML='<p class="bad">Check the dinner date and time.</p>';
+    return;
+  }
+  var r=T.calc(p);
+  var sizeNote=r.leftovers
+    ?'Butterball’s leftover figure of about 1.5 lb per person. USDA only publishes 1 lb per person and does not publish a leftovers amount.'
+    :'USDA: allow 1 pound of turkey per person (fresh or frozen).';
+  var tg=r.isThanksgiving2026?' <span class="tag">Thanksgiving 2026</span>':'';
+  var fridgeDays=r.fridge.daysMin!=null
+    ?r.fridge.daysMin+' to '+r.fridge.daysMax+' days (USDA chart)'
+    :'No USDA chart row for this weight. Formula only: about '+T.formatDurationHours(r.fridge.formulaDaysMin*24)+' to '+T.formatDurationHours(r.fridge.formulaDaysMax*24)+'.';
+  var water=T.formatDurationHours(r.water.formulaHours)+' (30 minutes per pound)';
+  if(r.water.hoursMin!=null) water+='; chart range '+T.formatDurationHours(r.water.hoursMin)+' to '+T.formatDurationHours(r.water.hoursMax);
+  var roastHtml;
+  if(r.roast.notUsuallyApplicable){
+    roastHtml='<p class="bad">USDA says stuffing a 4 to 6 lb turkey breast is “not usually applicable.” Cook stuffing in a casserole, or use a larger breast.</p>';
+  }else if(!r.roast.inChart){
+    roastHtml='<p class="bad">This weight is outside the USDA roast timetable used on this page (whole birds 8–24 lb, breasts 4–8 lb). We are not inventing a roast time. Use a food thermometer and the USDA Meat and Poultry Hotline (1-888-674-6854) or the package directions.</p>';
+  }else{
+    roastHtml='<p>'+T.formatDurationHours(r.roast.hoursMin)+' to '+T.formatDurationHours(r.roast.hoursMax)+' at 325°F ('+(r.stuffed?'stuffed':'unstuffed')+', '+(r.kind==='breast'?'breast':'whole turkey')+'). Times are approximate.</p>';
+  }
+  var startHtml='';
+  if(r.start){
+    startHtml='<div class="stats">'+
+      '<div class="stat"><b>'+clockLabel(r.start.earlier)+'</b><span>Safer start (uses the longer roast time, plus 20 min rest)</span></div>'+
+      '<div class="stat"><b>'+clockLabel(r.start.later)+'</b><span>Later start (shorter end of the USDA range, plus 20 min rest)</span></div>'+
+      '</div>'+
+      '<p class="note">These clock times aim for the turkey to come out around dinner, then rest 20 minutes before carving (USDA, for quality). Because roast times are approximate, start at the earlier time if you can, and always check 165°F with a thermometer.</p>';
+  }
+  box.innerHTML=
+    '<div class="stats">'+
+    '<div class="stat"><b class="big">'+lb(r.size.pounds)+'</b><span>Suggested turkey size for '+r.guests+' guest'+(r.guests===1?'':'s')+'</span></div>'+
+    '<div class="stat"><b>'+(r.fridgeStartYmd?prettyDate(r.fridgeStartDate):'—')+'</b><span>Move a frozen turkey to the fridge</span></div>'+
+    '<div class="stat"><b>'+r.safeTempF+'°F</b><span>Safe minimum internal temperature</span></div>'+
+    '<div class="stat"><b>'+(r.start?clockLabel(r.start.earlier):'—')+'</b><span>Start cooking (safer end of the window)</span></div>'+
+    '</div>'+
+    '<p class="note">'+sizeNote+' Buy at least this weight; store sizes come in bands. Dinner: <b>'+prettyDate(r.dinnerDate)+'</b> at '+clockLabel(T.formatClock((r.dinnerTime.hours*60)+r.dinnerTime.minutes))+'.'+tg+'</p>'+
+    '<h3>Thawing</h3>'+
+    '<table><tbody>'+
+    '<tr><td>Refrigerator (40°F or below)</td><td>'+fridgeDays+'</td></tr>'+
+    '<tr><td>Also, 24 hours per 4 to 5 lb</td><td>About '+r.fridge.formulaDaysMin.toFixed(1)+' to '+r.fridge.formulaDaysMax.toFixed(1)+' days</td></tr>'+
+    '<tr><td>Date to move it to the fridge</td><td>'+(r.fridgeStartYmd?prettyDate(r.fridgeStartDate)+' (using the longer chart time, '+r.planningDays+' day'+(r.planningDays===1?'':'s')+')':'—')+'</td></tr>'+
+    '<tr><td>Cold-water thaw</td><td>'+water+'. Change the water every 30 minutes. Cook immediately. Do not refreeze.</td></tr>'+
+    '</tbody></table>'+
+    '<h3>Roasting at 325°F</h3>'+
+    roastHtml+
+    '<p>Check 165°F in the innermost thigh and wing and the thickest part of the breast'+(r.stuffed?', and in the center of the stuffing':'')+'. Then let it rest 20 minutes before carving.</p>'+
+    '<h3>When to start cooking</h3>'+
+    (startHtml||'<p class="note">No start time is shown because there is no USDA roast range for this weight or stuffing choice.</p>')+
+    SAMPLE_CTA;
+}
+['guests','leftovers','kind','stuffed','dinnerDate','dinnerTime'].forEach(function(i){
+  $(i).addEventListener('input',render);
+  $(i).addEventListener('change',render);
+});
+render();
+</script>
+</body>
+</html>
