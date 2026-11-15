@@ -24,6 +24,7 @@ table{width:100%;border-collapse:collapse;font-size:.95rem}th,td{padding:7px 6px
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 label.f{display:block;font-weight:600;margin:10px 0 4px}input[type=number],input[type=text],input[type=date],select{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:560px){.two{grid-template-columns:1fr}}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:800px){.three{grid-template-columns:1fr}}
 .result{font-size:1.05rem}.big{font-size:1.8rem;font-weight:800;color:var(--pine)}
 .note{font-size:.85rem;color:var(--mute)}
 .ok{color:var(--pine);font-weight:700}.bad{color:var(--red);font-weight:700}

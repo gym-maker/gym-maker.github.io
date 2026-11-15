@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Black Friday Discount &amp; Stacked Coupon Calculator (2026)</title>
+<meta name="description" content="Free Black Friday calculator: enter price, percent off, an extra percent coupon (stacked sequentially or added), dollar off, and sales tax. See final price, total savings, effective discount, and compare two or three deals side by side. Pure math — no store data. U.S. Black Friday 2026 is Friday, November 27.">
+<link rel="canonical" href="https://gym-maker.github.io/black-friday-calculator/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#F5F0E8">
+<meta property="og:type" content="website"><meta property="og:locale" content="en_US">
+<meta property="og:title" content="Black Friday Discount &amp; Stacked Coupon Calculator">
+<meta property="og:description" content="Compare final price, savings, and effective discount when coupons are stacked sequentially versus added. Pure math, no store offers. Black Friday 2026 is Friday, November 27.">
+<meta property="og:url" content="https://gym-maker.github.io/black-friday-calculator/">
+<meta property="og:image" content="https://gym-maker.github.io/black-friday-calculator/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/tools.css">
+<style>
+.deal{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--bg)}
+.deal.best{border-color:var(--pine);box-shadow:0 0 0 2px var(--pine)}
+.deal h3{margin:0 0 10px;font-size:1rem}
+.deal .best-tag{display:inline-block;margin-left:8px;font-size:.75rem;font-weight:700;color:var(--pine);letter-spacing:.04em;text-transform:uppercase}
+.deal .out{margin-top:12px}
+.deal .out .big{font-size:1.55rem}
+.compare-banner{margin:0 0 12px;padding:10px 14px;border-radius:10px;background:var(--bg)}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the difference between stacking coupons sequentially and adding the percentages?","acceptedAnswer":{"@type":"Answer","text":"Sequential stacking applies the sale percent first, then applies the extra coupon percent to the already-reduced price. For a $100 item with 25% off and an extra 10% off, that is $100 × 0.75 × 0.90 = $67.50. Adding the percentages applies 25% + 10% = 35% to the original price, which is $65. This calculator shows both. It does not know how any particular store’s register works."}},
+{"@type":"Question","name":"Does this calculator use real Black Friday store prices?","acceptedAnswer":{"@type":"Answer","text":"No. It only does the arithmetic you enter. The default numbers are a worked example, not an offer from a store."}},
+{"@type":"Question","name":"Is sales tax calculated on the original price or the discounted price?","acceptedAnswer":{"@type":"Answer","text":"This page applies sales tax to the price after all discounts. Some places tax the pre-discount price. Enter your local rate if you want an estimate; this is not tax advice."}},
+{"@type":"Question","name":"When is Black Friday 2026?","acceptedAnswer":{"@type":"Answer","text":"U.S. Black Friday in 2026 is Friday, November 27, the day after Thanksgiving (Thursday, November 26)."}}
+]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<h1>Black Friday Discount &amp; Stacked Coupon Calculator</h1>
+<p class="lead">See what you actually pay after a sale, an extra percent-off coupon, a dollar-off coupon, and sales tax. Compare two or three deals side by side. This is <b>pure math</b> — it does not use store ads or invented sale prices. U.S. Black Friday 2026 is <b>Friday, November 27</b>.</p>
+</header>
+
+<section class="card">
+<div class="stats">
+<div class="stat"><b>Sequential</b><span>Extra % applies to the already-reduced price</span></div>
+<div class="stat"><b>Added</b><span>Sale % + coupon % applied once to the original</span></div>
+<div class="stat"><b>$ off</b><span>Subtracted after the percentages, not below $0</span></div>
+<div class="stat"><b>Tax last</b><span>Applied to the discounted price (not tax advice)</span></div>
+</div>
+</section>
+
+<section class="card">
+<h2>Compare up to three deals</h2>
+<p class="note">The first two columns are a worked example of the same $100 item with a 25% sale and a 10% coupon, calculated two ways (stacked sequentially vs added). They are not a real store offer. Leave a price blank to drop a deal from the comparison. Enter your own tax rate if you want; the default is 0%.</p>
+<div id="compareBanner" class="compare-banner note"></div>
+<div class="three" id="deals"></div>
+</section>
+
+<section class="card">
+<h2>How the math works</h2>
+<table>
+<thead><tr><th>Step</th><th>Rule</th></tr></thead>
+<tbody>
+<tr><td>1. Sale % off</td><td>Taken off the original price. Percents over 100 are treated as 100.</td></tr>
+<tr><td>2. Extra % coupon</td><td><b>Sequential (stacked):</b> the coupon applies to the already-reduced price. $100 with 25% off then 10% off is $67.50.<br><b>Added:</b> the two percents are added, then applied once to the original, capped at 100%. The same numbers become $65.</td></tr>
+<tr><td>3. Dollar off</td><td>Subtracted after the percentages. The price will not go below $0.</td></tr>
+<tr><td>4. Sales tax</td><td>Applied to the discounted price, then rounded to the nearest cent. Total savings and effective discount are pre-tax, versus the original price. Some jurisdictions tax the pre-discount price; this page does not try to model that.</td></tr>
+</tbody>
+</table>
+<p class="note">Each percentage discount is rounded to the nearest cent before the next step (half-up). A $19.99 item at 30% off is $13.99. A store’s register may round differently.</p>
+</section>
+
+<section class="card faq">
+<h2>Frequently asked questions</h2>
+<details open>
+<summary>Which stacking method should I pick?</summary>
+<p>Use the one that matches the coupon’s fine print, if you have it. “An extra 10% off” often means sequential (10% of the already-reduced price). Some promotions add the percentages. This page shows both so you can see the difference. It cannot tell you how a particular store will ring up the sale.</p>
+</details>
+<details>
+<summary>Are the default numbers a real Black Friday deal?</summary>
+<p>No. They are a worked example ($100, 25% off, 10% coupon) so you can see sequential vs added on the same inputs. Replace them with the prices and discounts in front of you.</p>
+</details>
+<details>
+<summary>Is the sales tax figure official?</summary>
+<p>No. This is not tax advice and not a tax table. If you enter a rate, it is applied to the discounted price. Your local rules may differ, including whether tax is charged on the pre-discount price.</p>
+</details>
+<details>
+<summary>When is Black Friday 2026?</summary>
+<p>Friday, November 27, 2026 — the day after U.S. Thanksgiving (Thursday, November 26).</p>
+</details>
+</section>
+
+<footer class="foot">
+<p><b>Note:</b> This is an arithmetic tool. It does not scrape or invent store prices, and it is not tax, legal, or shopping advice. A checkout total can still differ because of rounding, excluded items, coupon restrictions, shipping, or local tax rules. Made with AI help. Last checked 2026-11-16.</p>
+<p>Made with AI help · <a href="../">Free tools from Send This Instead</a> · <a href="../turkey-calculator/">Thanksgiving Turkey Calculator</a> · <a href="../2027-calendar/">2027 US holiday calendar</a></p>
+<p class="note noprint tool-cta">If you write work emails in English, there is a free 5-template sample you can download: <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=black-friday-calculator" target="_blank" rel="noopener">Send This Instead — free sample</a></p>
+<img class="px" src="https://hits.sh/gym-maker.github.io/black-friday-calculator.svg" alt="" aria-hidden="true">
+</footer>
+</div>
+<script src="blackfriday.js"></script>
+<script>
+var C=window.BlackFridayCalc;
+var SAMPLE_CTA='<p class="note noprint tool-cta">If you write work emails in English, there is a free 5-template sample you can download: <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=black-friday-calculator" target="_blank" rel="noopener">Send This Instead — free sample</a></p>';
+function $(i){return document.getElementById(i)}
+function val(id){
+  var el=$(id);
+  return el?el.value:'';
+}
+function dealInputs(i){
+  return {
+    price: val('price-'+i),
+    percentOff: val('sale-'+i),
+    couponPercent: val('coupon-'+i),
+    stack: val('stack-'+i)||'sequential',
+    dollarOff: val('dollar-'+i),
+    taxPercent: val('tax-'+i)
+  };
+}
+function field(id, label, attrs){
+  return '<label class="f" for="'+id+'">'+label+'</label><input id="'+id+'" '+attrs+'>';
+}
+function dealCard(i, title, defaults){
+  defaults=defaults||{};
+  var price=defaults.price!=null?defaults.price:'';
+  var sale=defaults.percentOff!=null?defaults.percentOff:'';
+  var coupon=defaults.couponPercent!=null?defaults.couponPercent:'';
+  var dollar=defaults.dollarOff!=null?defaults.dollarOff:'';
+  var tax=defaults.taxPercent!=null?defaults.taxPercent:'0';
+  var stack=defaults.stack||'sequential';
+  var html='<div class="deal" id="card-'+i+'"><h3>'+title+'<span class="best-tag" id="tag-'+i+'" hidden>Lower final price</span></h3>';
+  html+=field('price-'+i,'Original price ($)','type="number" inputmode="decimal" min="0" step="0.01" value="'+price+'"');
+  html+=field('sale-'+i,'Sale percent off','type="number" inputmode="decimal" min="0" step="0.01" value="'+sale+'"');
+  html+=field('coupon-'+i,'Extra coupon percent off','type="number" inputmode="decimal" min="0" step="0.01" value="'+coupon+'"');
+  html+='<label class="f" for="stack-'+i+'">How the extra % stacks</label>';
+  html+='<select id="stack-'+i+'">';
+  html+='<option value="sequential"'+(stack==='sequential'?' selected':'')+'>Sequential — coupon applies to the reduced price</option>';
+  html+='<option value="added"'+(stack==='added'?' selected':'')+'>Added — sale % + coupon % off the original</option>';
+  html+='</select>';
+  html+=field('dollar-'+i,'Dollar off ($)','type="number" inputmode="decimal" min="0" step="0.01" value="'+dollar+'"');
+  html+=field('tax-'+i,'Sales tax percent','type="number" inputmode="decimal" min="0" step="0.01" value="'+tax+'"');
+  html+='<div class="out" id="out-'+i+'"></div></div>';
+  return html;
+}
+function renderDeal(i, result, isBest, tied){
+  var box=$('out-'+i), card=$('card-'+i), tag=$('tag-'+i);
+  card.classList.toggle('best', !!isBest);
+  tag.hidden=!isBest;
+  tag.textContent=tied?'Tied for lowest':'Lower final price';
+  if(result.reason==='empty'){
+    box.innerHTML='<p class="note">Enter a price to include this deal.</p>';
+    return;
+  }
+  if(!result.ok){
+    box.innerHTML='<p class="bad">Check the numbers — price, percents, dollar off, and tax can’t be negative.</p>';
+    return;
+  }
+  var html='<p class="note">Price after discounts</p><p class="big">'+C.money(result.preTax)+'</p>';
+  html+='<p>Final price'+(result.taxCents?' (with tax) ':' ')+'<b>'+C.money(result.finalPrice)+'</b></p>';
+  if(result.taxCents) html+='<p class="note">Sales tax: '+C.money(result.taxAmount)+'</p>';
+  html+='<p>Total savings (pre-tax): <b>'+C.money(result.savings)+'</b></p>';
+  html+='<p>Effective discount: <b>'+C.pct(result.effectivePct)+'</b></p>';
+  if(result.couponApplied>0 && result.altPreTaxCents!==result.preTaxCents){
+    var other=result.altStack==='added'?'added the percentages':'stacked them sequentially';
+    html+='<p class="note">If you '+other+' instead, the pre-tax price would be '+C.money(result.altPreTax)+'.</p>';
+  }
+  if(result.clamped) html+='<p class="note">A percent over 100% was treated as 100%.</p>';
+  box.innerHTML=html;
+}
+function render(){
+  var deals=[dealInputs(0),dealInputs(1),dealInputs(2)];
+  var cmp=C.compareDeals(deals);
+  var tied=cmp.ties && cmp.ties.length>1;
+  for(var i=0;i<3;i++){
+    renderDeal(i, cmp.rows[i].result, cmp.cheapestIndex===i, tied);
+  }
+  var banner=$('compareBanner');
+  if(cmp.validCount===0){
+    banner.textContent='Enter at least one original price to see a total.';
+  } else if(cmp.validCount===1){
+    var only=cmp.rows[cmp.cheapestIndex].result;
+    banner.textContent='One deal in the comparison. Final price: '+C.money(only.finalPrice)+'. Add another price to compare.';
+  } else if(tied){
+    banner.textContent='Tie: '+cmp.ties.map(function(i){return 'Deal '+(i+1);}).join(' and ')+' have the same final price of '+C.money(cmp.rows[cmp.cheapestIndex].result.finalPrice)+'.';
+  } else {
+    var best=cmp.rows[cmp.cheapestIndex].result;
+    var others=cmp.rows.filter(function(r){return r.result.ok && r.index!==cmp.cheapestIndex;});
+    var next=others.slice().sort(function(a,b){return a.result.finalCents-b.result.finalCents;})[0];
+    var gap=C.money((next.result.finalCents-best.finalCents)/100);
+    banner.innerHTML='<b>Deal '+(cmp.cheapestIndex+1)+'</b> has the lower final price: '+C.money(best.finalPrice)+' — '+gap+' less than the next deal.';
+  }
+}
+$('deals').innerHTML=
+  dealCard(0,'Deal 1',{price:'100',percentOff:'25',couponPercent:'10',stack:'sequential',dollarOff:'',taxPercent:'0'})+
+  dealCard(1,'Deal 2',{price:'100',percentOff:'25',couponPercent:'10',stack:'added',dollarOff:'',taxPercent:'0'})+
+  dealCard(2,'Deal 3 (optional)',{price:'',percentOff:'',couponPercent:'',stack:'sequential',dollarOff:'',taxPercent:'0'});
+$('deals').addEventListener('input', render);
+$('deals').addEventListener('change', render);
+render();
+</script>
+</body>
+</html>
