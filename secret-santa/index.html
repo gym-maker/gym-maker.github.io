@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Secret Santa Generator / 마니또 뽑기 — no sign-up, stays in your browser</title>
+<meta name="description" content="Free Secret Santa and 마니또 name draw with couple exclusions. Everyone gets a private reveal link or a printable card. Nothing is sent to a server — the draw stays in your browser.">
+<link rel="canonical" href="https://gym-maker.github.io/secret-santa/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#F5F0E8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Secret Santa Generator / 마니또 뽑기">
+<meta property="og:description" content="Draw names in your browser. Block couples, share private reveal links, or print folded cards. No sign-up, nothing uploaded.">
+<meta property="og:url" content="https://gym-maker.github.io/secret-santa/">
+<meta property="og:image" content="https://gym-maker.github.io/secret-santa/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/tools.css">
+<style>
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.lang{display:flex;gap:4px}
+.lang button{appearance:none;border:1px solid var(--line);background:transparent;color:var(--mute);border-radius:999px;padding:4px 10px;font:inherit;font-size:.85rem;cursor:pointer}
+.lang button.on{border-color:var(--ink);background:var(--ink);color:#fff;font-weight:600}
+.err{background:var(--red-soft);border:1px solid #e8b4ae;border-radius:12px;padding:12px 14px;margin:14px 0;color:var(--red)}
+.okbox{background:var(--pine-soft);border-radius:12px;padding:12px 14px;margin:0 0 14px}
+.exrows{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.exrow{display:grid;grid-template-columns:1fr auto 1fr auto;gap:8px;align-items:center}
+@media(max-width:560px){.exrow{grid-template-columns:1fr auto}}
+.links td code{font-size:.8rem;word-break:break-all}
+.gift{text-align:center;padding:24px 8px}
+.gift .who{font-size:2rem;font-weight:800;color:var(--pine);margin:8px 0 0}
+.cards-preview{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:12px}
+.pcard{border:1px dashed var(--ink);border-radius:12px;padding:12px 14px;background:#fff;break-inside:avoid}
+.pcard .flap{font-size:.8rem;color:var(--mute);letter-spacing:.04em;text-transform:uppercase}
+.pcard .for{font-size:1.2rem;font-weight:800;margin:4px 0 10px}
+.pcard .fold{border-top:1px dashed var(--line);margin:8px 0;padding-top:8px;font-size:.85rem;color:var(--mute)}
+.pcard .to{font-size:1.15rem;font-weight:700;color:var(--pine)}
+.warn{font-size:.85rem;color:var(--mute);background:var(--bg);border-radius:10px;padding:10px 12px}
+#revealView,#results,#errBox,#printArea{display:none}
+#revealView.on,#results.on,#errBox.on{display:block}
+body.printing #printArea{display:block}
+body.mode-reveal #setup,body.mode-reveal #results,body.mode-reveal #errBox{display:none!important}
+body.mode-reveal #revealView{display:block}
+@media print{
+  body{background:#fff}
+  .noprint,footer.foot,.lang,.lead,header.top .bar{display:none!important}
+  #setup,#results,#errBox,#revealView{display:none!important}
+  body.mode-reveal #revealView{display:block!important}
+  body.mode-reveal #printArea{display:none!important}
+  body.printing #printArea{display:block!important}
+  .wrap{max-width:none;padding:0}
+  .cards-preview{display:block}
+  .pcard{width:100%;height:48vh;margin:0 0 4vh;padding:16px 20px;border:2px dashed #1A1814;border-radius:0;page-break-inside:avoid;break-inside:avoid}
+  .pcard .for{font-size:1.8rem}
+  .pcard .to{font-size:1.6rem}
+  @page{size:A4 portrait;margin:10mm}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Does this Secret Santa generator store names or send emails?","acceptedAnswer":{"@type":"Answer","text":"No. The draw runs in your browser. Names never leave your device, and there is no sign-up or email sending."}},
+{"@type":"Question","name":"Are the private reveal links secure?","acceptedAnswer":{"@type":"Answer","text":"No. Each assignment is only lightly hidden in the link (the part after #). Anyone who has the link, or who can see your browser history, can read it. Do not post the links in a shared chat if you want them to stay private."}},
+{"@type":"Question","name":"Can couples be excluded from drawing each other?","acceptedAnswer":{"@type":"Answer","text":"Yes. Add a couple as an exclusion and they will not be assigned to each other. A group of three with one couple cannot produce a valid draw, because both partners would have to give to the same third person. You need at least four people for a couple exclusion to work."}}
+]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<div class="bar noprint">
+  <p class="note" style="margin:0" id="brand"><a href="../">Send This Instead</a></p>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" id="btnEn" class="on" onclick="setLang('en')">EN</button>
+    <button type="button" id="btnKo" onclick="setLang('ko')">한국어</button>
+  </div>
+</div>
+<h1 id="tTitle">Secret Santa Generator</h1>
+<p class="lead" id="tLead">Draw names in your browser. Nobody has to sign up, and nothing is sent to a server. You can stop couples from getting each other, then share a private reveal link or print folded cards.</p>
+</header>
+
+<section id="setup" class="card noprint">
+<h2 id="tNamesH">Names</h2>
+<label class="f" for="names" id="tNamesL">One name per line</label>
+<textarea id="names" rows="8" placeholder="Alice&#10;Bob&#10;Cara&#10;Dan" style="width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;resize:vertical"></textarea>
+<p class="note" id="tNamesN">You need at least two people. Use a distinct name for each person (add a last initial if two share a first name).</p>
+
+<h3 id="tExH">Exclusions (couples)</h3>
+<p class="note" id="tExN">Optional. Each pair will not be assigned to each other. A couple in a group of three makes a valid draw impossible — you need at least four people.</p>
+<div class="exrows" id="exrows"></div>
+<div class="row" style="margin-top:4px">
+  <button type="button" class="btn ghost" id="tAddEx" onclick="addExclusion()">Add a couple</button>
+</div>
+
+<div class="two" style="margin-top:12px">
+  <div>
+    <label class="f" for="budget" id="tBudgetL">Budget (optional)</label>
+    <input id="budget" type="text" maxlength="40" placeholder="$25 / 3만원">
+  </div>
+  <div>
+    <label class="f" for="date" id="tDateL">Exchange date (optional)</label>
+    <input id="date" type="text" maxlength="40" placeholder="Dec 20 / 12월 20일">
+  </div>
+</div>
+
+<div class="row" style="margin-top:16px">
+  <button type="button" class="btn" id="tDraw" onclick="drawNames()">Draw names</button>
+</div>
+</section>
+
+<div id="errBox" class="err noprint" role="alert"></div>
+
+<section id="results" class="card noprint">
+<div class="okbox" id="tReady">The draw is ready.</div>
+<p class="warn" id="tPriv">These links are only lightly hidden. Anyone who has a link, or who looks through browser history, can read that assignment. They are not passwords. The assignment sits in the part of the URL after #, so it is not sent to our server — but it is not secure against snooping.</p>
+<div style="overflow-x:auto;margin-top:12px">
+<table class="links"><thead><tr><th id="tColWho">Who</th><th id="tColLink">Private reveal link</th><th></th></tr></thead><tbody id="linkBody"></tbody></table>
+</div>
+<div class="row" style="margin-top:12px">
+  <button type="button" class="btn" id="tCopyAll" onclick="copyAllLinks()">Copy all links</button>
+  <button type="button" class="btn ghost" id="tCopyList" onclick="copyFullList()">Copy the full list</button>
+  <button type="button" class="btn ghost" id="tPrint" onclick="printCards()">Print cards</button>
+  <button type="button" class="btn ghost" id="tAgain" onclick="resetDraw()">Draw again</button>
+</div>
+<p class="note" id="tListWarn" style="margin-top:10px">“Copy the full list” reveals every assignment. Only use it if you are sending the names yourself, or if secrecy does not matter.</p>
+<p class="note" id="tEmail" style="margin-top:8px">Need the gift-exchange invite email? There is a short template in the <a href="https://3368936654923.gumroad.com/l/uctkrr?utm_source=tools" target="_blank" rel="noopener">Holiday email pack</a>.</p>
+<h3 id="tCardsH" style="margin-top:18px">Foldable cards</h3>
+<p class="note" id="tCardsN">Fold each card at the dashed line so the recipient’s name stays inside. Print, then cut or fold the pages in half.</p>
+<div class="cards-preview" id="cardsPreview"></div>
+</section>
+
+<section id="revealView" class="card">
+<div class="gift">
+  <p class="note" id="rvHi"></p>
+  <p class="who" id="rvTo"></p>
+  <p class="note" id="rvMeta" style="margin-top:12px"></p>
+</div>
+<p class="warn" id="rvPriv"></p>
+<div class="row noprint" style="margin-top:14px">
+  <button type="button" class="btn ghost" id="rvNew" onclick="clearReveal()">Start a new draw</button>
+</div>
+</section>
+
+<div id="printArea" aria-hidden="true"></div>
+
+<section class="card faq noprint">
+<h2 id="tFaqH">FAQ</h2>
+<details open>
+  <summary id="tQ1">Does this store names or send emails?</summary>
+  <p id="tA1">No. The draw runs in your browser. Names never leave your device, and there is no sign-up or email sending.</p>
+</details>
+<details>
+  <summary id="tQ2">Are the private reveal links secure?</summary>
+  <p id="tA2">No. Each assignment is only lightly hidden in the link (the part after #). Anyone who has the link, or who can see your browser history, can read it. Do not post the links in a shared chat if you want them to stay private.</p>
+</details>
+<details>
+  <summary id="tQ3">Can couples be excluded from drawing each other?</summary>
+  <p id="tA3">Yes. Add a couple as an exclusion and they will not be assigned to each other. A group of three with one couple cannot produce a valid draw, because both partners would have to give to the same third person. You need at least four people for a couple exclusion to work.</p>
+</details>
+<details>
+  <summary id="tQ4">What do the printable cards look like?</summary>
+  <p id="tA4">Each card has the recipient’s name on the outside and who they are buying for below a fold line. Print them and fold so only the outer name shows until the card is opened.</p>
+</details>
+</section>
+
+<footer class="foot">
+<p id="tFoot1">Made with AI help by Send This Instead · <a href="../">More free tools</a></p>
+<p id="tFoot2">The draw never leaves your browser. Reveal links are lightly obfuscated, not encrypted.</p>
+<img class="px" src="https://hits.sh/gym-maker.github.io/secret-santa.svg" alt="" aria-hidden="true">
+</footer>
+</div>
+<script src="santa.js"></script>
+<script>
+var I18N = {
+  en: {
+    htmlLang: 'en',
+    tTitle: 'Secret Santa Generator',
+    tLead: 'Draw names in your browser. Nobody has to sign up, and nothing is sent to a server. You can stop couples from getting each other, then share a private reveal link or print folded cards.',
+    tNamesH: 'Names', tNamesL: 'One name per line',
+    tNamesN: 'You need at least two people. Use a distinct name for each person (add a last initial if two share a first name).',
+    tExH: 'Exclusions (couples)',
+    tExN: 'Optional. Each pair will not be assigned to each other. A couple in a group of three makes a valid draw impossible — you need at least four people.',
+    tAddEx: 'Add a couple', tBudgetL: 'Budget (optional)', tDateL: 'Exchange date (optional)',
+    tDraw: 'Draw names', tReady: 'The draw is ready.',
+    tPriv: 'These links are only lightly hidden. Anyone who has a link, or who looks through browser history, can read that assignment. They are not passwords. The assignment sits in the part of the URL after #, so it is not sent to our server — but it is not secure against snooping.',
+    tColWho: 'Who', tColLink: 'Private reveal link',
+    tCopyAll: 'Copy all links', tCopyList: 'Copy the full list', tPrint: 'Print cards', tAgain: 'Draw again',
+    tListWarn: '“Copy the full list” reveals every assignment. Only use it if you are sending the names yourself, or if secrecy does not matter.',
+    tEmail: 'Need the gift-exchange invite email? There is a short template in the <a href="https://3368936654923.gumroad.com/l/uctkrr?utm_source=tools" target="_blank" rel="noopener">Holiday email pack</a>.',
+    tCardsH: 'Foldable cards',
+    tCardsN: 'Fold each card at the dashed line so the recipient’s name stays inside. Print, then cut or fold the pages in half.',
+    tFaqH: 'FAQ',
+    tQ1: 'Does this store names or send emails?',
+    tA1: 'No. The draw runs in your browser. Names never leave your device, and there is no sign-up or email sending.',
+    tQ2: 'Are the private reveal links secure?',
+    tA2: 'No. Each assignment is only lightly hidden in the link (the part after #). Anyone who has the link, or who can see your browser history, can read it. Do not post the links in a shared chat if you want them to stay private.',
+    tQ3: 'Can couples be excluded from drawing each other?',
+    tA3: 'Yes. Add a couple as an exclusion and they will not be assigned to each other. A group of three with one couple cannot produce a valid draw, because both partners would have to give to the same third person. You need at least four people for a couple exclusion to work.',
+    tQ4: 'What do the printable cards look like?',
+    tA4: 'Each card has the recipient’s name on the outside and who they are buying for below a fold line. Print them and fold so only the outer name shows until the card is opened.',
+    tFoot1: 'Made with AI help by Send This Instead · <a href="../">More free tools</a>',
+    tFoot2: 'The draw never leaves your browser. Reveal links are lightly obfuscated, not encrypted.',
+    cannot: 'cannot draw', remove: 'Remove', pick: 'Choose a name',
+    copy: 'Copy', copied: 'Copied',
+    readyN: function(n){ return 'The draw is ready for ' + n + ' people.'; },
+    rvHi: function(name){ return name + ', you are buying a gift for'; },
+    rvMeta: function(b,d){
+      var parts = [];
+      if (b) parts.push('Budget: ' + b);
+      if (d) parts.push('Exchange: ' + d);
+      return parts.join(' · ');
+    },
+    rvPriv: 'This page was built from the part of the link after #. It is only lightly hidden, not a secret. Anyone with this link can see the assignment.',
+    rvNew: 'Start a new draw',
+    rvBad: 'This reveal link is not valid. Ask the organizer to send it again.',
+    cardTitle: 'Secret Santa', cardFor: 'For', cardFold: 'Fold here — keep the name below hidden', cardBuy: 'You are buying a gift for',
+    listHead: 'Secret Santa assignments',
+    cardBudget: 'Budget', cardDate: 'Exchange',
+    needNamesFirst: 'Add the names first, then you can exclude a couple.'
+  },
+  ko: {
+    htmlLang: 'ko',
+    tTitle: '마니또 뽑기',
+    tLead: '브라우저에서 바로 이름을 뽑아요. 가입은 필요 없고, 입력한 이름은 어디에도 보내지 않아요. 커플이 서로 뽑히지 않게 제외할 수 있고, 각자 확인 링크를 보내거나 접는 카드를 인쇄할 수 있어요.',
+    tNamesH: '이름', tNamesL: '한 줄에 한 이름',
+    tNamesN: '두 명 이상 필요해요. 이름이 같으면 성이나 이니셜을 붙여 구분해 주세요.',
+    tExH: '제외 (커플)',
+    tExN: '선택 사항이에요. 짝지은 두 사람은 서로를 뽑지 않아요. 세 명 중에 커플 한 쌍이 있으면 유효한 뽑기가 불가능해서, 커플 제외는 네 명 이상일 때 쓸 수 있어요.',
+    tAddEx: '커플 추가', tBudgetL: '예산 (선택)', tDateL: '교환 날짜 (선택)',
+    tDraw: '뽑기', tReady: '뽑기가 끝났어요.',
+    tPriv: '이 링크는 아주 얕게만 가려 둔 거예요. 링크를 가진 사람, 또는 브라우저 기록을 보는 사람은 그 배정을 읽을 수 있어요. 비밀번호가 아닙니다. 배정은 주소의 # 뒤에만 들어 있어서 서버로는 가지 않지만, 엿보기에는 안전하지 않아요.',
+    tColWho: '누구', tColLink: '개인 확인 링크',
+    tCopyAll: '링크 모두 복사', tCopyList: '전체 명단 복사', tPrint: '카드 인쇄', tAgain: '다시 뽑기',
+    tListWarn: '“전체 명단 복사”는 모든 배정을 보여 줘요. 직접 나눠 줄 때, 또는 비밀이 상관없을 때만 쓰세요.',
+    tEmail: '선물 교환 모임 초대 메일이 필요하면, <a href="https://3368936654923.gumroad.com/l/uctkrr?utm_source=tools" target="_blank" rel="noopener">Holiday 이메일 팩</a>에 짧은 템플릿이 있어요.',
+    tCardsH: '접는 카드',
+    tCardsN: '점선에서 접어서 상대 이름이 안에 들어가게 하세요. 인쇄한 뒤 반으로 접거나 잘라 쓰면 돼요.',
+    tFaqH: '자주 묻는 질문',
+    tQ1: '이름을 저장하거나 이메일을 보내나요?',
+    tA1: '아니요. 뽑기는 브라우저 안에서만 돌아요. 이름은 기기를 떠나지 않고, 가입이나 메일 발송도 없어요.',
+    tQ2: '개인 확인 링크는 안전한가요?',
+    tA2: '아니요. 각 배정은 링크의 # 뒤에 아주 얕게만 가려 두었어요. 링크를 가진 사람, 또는 브라우저 기록을 보는 사람은 내용을 읽을 수 있어요. 비밀을 지키려면 여러 사람이 보는 채팅에 링크를 올리지 마세요.',
+    tQ3: '커플이 서로 뽑히지 않게 할 수 있나요?',
+    tA3: '네. 제외에 커플을 넣으면 서로를 뽑지 않아요. 세 명 중에 커플 한 쌍이 있으면, 두 사람이 모두 나머지 한 명에게만 선물을 줘야 해서 뽑기가 불가능해요. 커플 제외는 네 명 이상일 때 쓸 수 있어요.',
+    tQ4: '인쇄 카드는 어떻게 생겼나요?',
+    tA4: '바깥에는 카드를 받는 사람 이름이, 접는선 아래에는 그 사람이 선물을 줄 상대가 적혀 있어요. 인쇄한 뒤 접어서, 열어 보기 전에는 바깥 이름만 보이게 하세요.',
+    tFoot1: 'AI 도움을 받아 만들었어요 · Send This Instead · <a href="../">무료 도구 모음</a>',
+    tFoot2: '뽑기 결과는 브라우저 밖으로 나가지 않아요. 확인 링크는 얕게 가린 것일 뿐, 암호화가 아니에요.',
+    cannot: '뽑을 수 없음', remove: '삭제', pick: '이름 선택',
+    copy: '복사', copied: '복사됨',
+    readyN: function(n){ return n + '명 뽑기가 끝났어요.'; },
+    rvHi: function(name){ return name + ' 님, 선물을 줄 사람은'; },
+    rvMeta: function(b,d){
+      var parts = [];
+      if (b) parts.push('예산: ' + b);
+      if (d) parts.push('교환일: ' + d);
+      return parts.join(' · ');
+    },
+    rvPriv: '이 페이지는 링크의 # 뒤 부분으로 만들어졌어요. 아주 얕게만 가린 것이라 비밀이 아니에요. 이 링크를 가진 사람은 배정을 볼 수 있어요.',
+    rvNew: '새로 뽑기',
+    rvBad: '이 확인 링크는 올바르지 않아요. 주최자에게 다시 받아 주세요.',
+    cardTitle: '마니또', cardFor: '받는 사람', cardFold: '여기서 접기 — 아래 이름은 숨겨 두세요', cardBuy: '선물을 줄 사람',
+    listHead: '마니또 배정',
+    cardBudget: '예산', cardDate: '교환일',
+    needNamesFirst: '먼저 이름을 넣은 다음, 커플을 제외할 수 있어요.'
+  }
+};
+
+var lang = 'en';
+var lastDraw = null;
+
+function T(){ return I18N[lang]; }
+function $(id){ return document.getElementById(id); }
+function esc(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+  });
+}
+
+function setLang(next){
+  lang = next === 'ko' ? 'ko' : 'en';
+  try { localStorage.setItem('secret-santa-lang', lang); } catch (e) {}
+  var t = T();
+  document.documentElement.lang = t.htmlLang;
+  $('btnEn').className = lang === 'en' ? 'on' : '';
+  $('btnKo').className = lang === 'ko' ? 'on' : '';
+  var ids = ['tTitle','tLead','tNamesH','tNamesL','tNamesN','tExH','tExN','tBudgetL','tDateL','tPriv','tColWho','tColLink','tListWarn','tCardsH','tCardsN','tFaqH','tQ1','tA1','tQ2','tA2','tQ3','tA3','tQ4','tA4','tFoot2'];
+  for (var i = 0; i < ids.length; i++) {
+    var el = $(ids[i]);
+    if (el && typeof t[ids[i]] === 'string') el.textContent = t[ids[i]];
+  }
+  $('tAddEx').textContent = t.tAddEx;
+  $('tDraw').textContent = t.tDraw;
+  $('tCopyAll').textContent = t.tCopyAll;
+  $('tCopyList').textContent = t.tCopyList;
+  $('tPrint').textContent = t.tPrint;
+  $('tAgain').textContent = t.tAgain;
+  $('tFoot1').innerHTML = t.tFoot1;
+  $('tEmail').innerHTML = t.tEmail;
+  $('tReady').textContent = lastDraw ? t.readyN(lastDraw.pairs.length) : t.tReady;
+  if (lastDraw) renderResults(lastDraw);
+  refreshExclusionOptions();
+  syncExclusionLabels();
+  if (document.body.classList.contains('mode-reveal')) applyReveal();
+}
+
+function currentNames(){ return SecretSanta.parseNames($('names').value); }
+
+function addExclusion(preA, preB){
+  var names = currentNames();
+  if (names.length < 2) {
+    showErr(T().needNamesFirst);
+    return;
+  }
+  hideErr();
+  var row = document.createElement('div');
+  row.className = 'exrow';
+  row.innerHTML = '<select class="exA"></select><span class="exMid note"></span><select class="exB"></select><button type="button" class="btn ghost exDel"></button>';
+  $('exrows').appendChild(row);
+  row.querySelector('.exDel').addEventListener('click', function(){ row.remove(); });
+  fillSelects(row, names, preA, preB);
+  syncExclusionLabels();
+}
+
+function fillSelects(row, names, preA, preB){
+  var a = row.querySelector('.exA'), b = row.querySelector('.exB');
+  var curA = preA != null ? preA : a.value, curB = preB != null ? preB : b.value;
+  function opts(sel, cur){
+    var html = '<option value="">' + esc(T().pick) + '</option>';
+    for (var i = 0; i < names.length; i++) {
+      html += '<option value="' + esc(names[i]) + '"' + (names[i] === cur ? ' selected' : '') + '>' + esc(names[i]) + '</option>';
+    }
+    sel.innerHTML = html;
+  }
+  opts(a, curA); opts(b, curB);
+}
+
+function refreshExclusionOptions(){
+  var names = currentNames();
+  var rows = $('exrows').querySelectorAll('.exrow');
+  for (var i = 0; i < rows.length; i++) fillSelects(rows[i], names);
+}
+
+function syncExclusionLabels(){
+  var t = T();
+  var mids = document.querySelectorAll('.exMid');
+  for (var i = 0; i < mids.length; i++) mids[i].textContent = t.cannot;
+  var dels = document.querySelectorAll('.exDel');
+  for (var j = 0; j < dels.length; j++) dels[j].textContent = t.remove;
+}
+
+function readCouples(names){
+  var index = Object.create(null);
+  for (var i = 0; i < names.length; i++) index[names[i]] = i;
+  var couples = [], rows = $('exrows').querySelectorAll('.exrow');
+  for (var r = 0; r < rows.length; r++) {
+    var a = rows[r].querySelector('.exA').value, b = rows[r].querySelector('.exB').value;
+    if (!a || !b) continue;
+    if (index[a] == null || index[b] == null) continue;
+    if (a === b) continue;
+    couples.push([index[a], index[b]]);
+  }
+  return couples;
+}
+
+function showErr(msg){
+  $('errBox').textContent = msg;
+  $('errBox').classList.add('on');
+  $('errBox').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+function hideErr(){ $('errBox').classList.remove('on'); $('errBox').textContent = ''; }
+
+function baseUrl(){
+  return location.origin + location.pathname;
+}
+
+function revealUrl(pair, budget, date){
+  var frag = SecretSanta.encodeReveal({ from: pair.from, to: pair.to, budget: budget, date: date });
+  return baseUrl() + '#' + frag;
+}
+
+function drawNames(){
+  hideErr();
+  lastDraw = null;
+  $('results').classList.remove('on');
+  var names, result;
+  try {
+    names = SecretSanta.normalizeNames(SecretSanta.parseNames($('names').value));
+    result = SecretSanta.generate(names, { couples: readCouples(names) });
+  } catch (e) {
+    var msg = (e && (lang === 'ko' ? e.messageKo : e.messageEn)) || (lang === 'ko' ? '뽑기에 실패했어요.' : 'The draw failed.');
+    showErr(msg);
+    return;
+  }
+  lastDraw = result;
+  lastDraw.budget = $('budget').value.replace(/^\s+|\s+$/g, '');
+  lastDraw.date = $('date').value.replace(/^\s+|\s+$/g, '');
+  renderResults(lastDraw);
+  $('results').classList.add('on');
+  $('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function renderResults(draw){
+  var t = T();
+  $('tReady').textContent = t.readyN(draw.pairs.length);
+  var body = '';
+  for (var i = 0; i < draw.pairs.length; i++) {
+    var p = draw.pairs[i];
+    var url = revealUrl(p, draw.budget, draw.date);
+    body += '<tr><td><b>' + esc(p.from) + '</b></td><td><code>' + esc(url) + '</code></td><td><button type="button" class="btn ghost" data-copy="' + esc(url) + '">' + esc(t.copy) + '</button></td></tr>';
+  }
+  $('linkBody').innerHTML = body;
+  var btns = $('linkBody').querySelectorAll('[data-copy]');
+  for (var j = 0; j < btns.length; j++) {
+    btns[j].addEventListener('click', function(ev){ copyText(ev.currentTarget.getAttribute('data-copy'), ev.currentTarget); });
+  }
+  $('cardsPreview').innerHTML = draw.pairs.map(cardHtml).join('');
+  $('printArea').innerHTML = draw.pairs.map(cardHtml).join('');
+}
+
+function cardHtml(p){
+  var t = T();
+  var meta = [];
+  if (lastDraw && lastDraw.budget) meta.push(t.cardBudget + ': ' + esc(lastDraw.budget));
+  if (lastDraw && lastDraw.date) meta.push(t.cardDate + ': ' + esc(lastDraw.date));
+  return '<div class="pcard"><div class="flap">' + esc(t.cardTitle) + '</div><div class="note">' + esc(t.cardFor) + '</div><div class="for">' + esc(p.from) + '</div><div class="fold">' + esc(t.cardFold) + '</div><div class="note">' + esc(t.cardBuy) + '</div><div class="to">' + esc(p.to) + '</div>' + (meta.length ? '<p class="note">' + meta.join(' · ') + '</p>' : '') + '</div>';
+}
+
+function copyText(text, btn){
+  function ok(){
+    if (!btn) return;
+    var old = btn.textContent;
+    btn.textContent = T().copied;
+    setTimeout(function(){ btn.textContent = old; }, 1200);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(ok).catch(function(){ fallbackCopy(text); ok(); });
+  } else { fallbackCopy(text); ok(); }
+}
+function fallbackCopy(text){
+  var ta = document.createElement('textarea');
+  ta.value = text; document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); } catch (e) {}
+  document.body.removeChild(ta);
+}
+function copyAllLinks(){
+  if (!lastDraw) return;
+  var t = T();
+  var lines = lastDraw.pairs.map(function(p){ return p.from + '\t' + revealUrl(p, lastDraw.budget, lastDraw.date); });
+  copyText(lines.join('\n'), $('tCopyAll'));
+  $('tCopyAll').textContent = t.copied;
+  setTimeout(function(){ $('tCopyAll').textContent = t.tCopyAll; }, 1200);
+}
+function copyFullList(){
+  if (!lastDraw) return;
+  var t = T();
+  var lines = [t.listHead];
+  if (lastDraw.budget) lines.push(t.cardBudget + ': ' + lastDraw.budget);
+  if (lastDraw.date) lines.push(t.cardDate + ': ' + lastDraw.date);
+  lastDraw.pairs.forEach(function(p){ lines.push(p.from + ' → ' + p.to); });
+  copyText(lines.join('\n'), $('tCopyList'));
+  $('tCopyList').textContent = t.copied;
+  setTimeout(function(){ $('tCopyList').textContent = t.tCopyList; }, 1200);
+}
+function printCards(){
+  document.body.classList.add('printing');
+  window.print();
+  setTimeout(function(){ document.body.classList.remove('printing'); }, 300);
+}
+function resetDraw(){
+  lastDraw = null;
+  $('results').classList.remove('on');
+  $('cardsPreview').innerHTML = '';
+  $('printArea').innerHTML = '';
+  hideErr();
+}
+
+function applyReveal(){
+  var data = SecretSanta.decodeReveal(location.hash);
+  var t = T();
+  if (!data) {
+    if (location.hash && /r=/.test(location.hash)) {
+      document.body.classList.add('mode-reveal');
+      $('rvHi').textContent = t.rvBad;
+      $('rvTo').textContent = '';
+      $('rvMeta').textContent = '';
+      $('rvPriv').textContent = t.rvPriv;
+      $('rvNew').textContent = t.rvNew;
+    } else {
+      document.body.classList.remove('mode-reveal');
+    }
+    return;
+  }
+  document.body.classList.add('mode-reveal');
+  $('rvHi').textContent = t.rvHi(data.from);
+  $('rvTo').textContent = data.to;
+  $('rvMeta').textContent = t.rvMeta(data.budget, data.date);
+  $('rvPriv').textContent = t.rvPriv;
+  $('rvNew').textContent = t.rvNew;
+}
+function clearReveal(){
+  if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+  else location.hash = '';
+  document.body.classList.remove('mode-reveal');
+}
+
+$('names').addEventListener('change', refreshExclusionOptions);
+window.addEventListener('hashchange', applyReveal);
+window.addEventListener('afterprint', function(){ document.body.classList.remove('printing'); });
+
+(function init(){
+  var saved = null;
+  try { saved = localStorage.getItem('secret-santa-lang'); } catch (e) {}
+  setLang(saved === 'ko' ? 'ko' : 'en');
+  applyReveal();
+})();
+</script>
+</body>
+</html>
