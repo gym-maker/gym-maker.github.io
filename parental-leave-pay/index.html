@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>육아휴직 급여 계산기 (2026) — 일반·6+6 부모함께·한부모</title>
+<meta name="description" content="월 통상임금과 휴직 기간으로 육아휴직 급여를 계산해요. 일반·6+6 부모함께 육아휴직·한부모 특례의 상·하한은 고용보험법 시행령 제95조·제95조의3 기준이며, 2025.1.1. 이후 사용 기간은 사후지급 없이 전액입니다. 2027년 개정은 미확정으로 표시합니다. 참고용입니다.">
+<link rel="canonical" href="https://gym-maker.github.io/parental-leave-pay/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#F5F0E8">
+<meta property="og:type" content="website"><meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="육아휴직 급여 계산기 (2026)">
+<meta property="og:description" content="일반·6+6 부모함께·한부모 상·하한으로 월별 급여와 총액을 계산해요. 사후지급 없이 전액입니다. 참고용입니다.">
+<meta property="og:url" content="https://gym-maker.github.io/parental-leave-pay/">
+<meta property="og:image" content="https://gym-maker.github.io/parental-leave-pay/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/tools.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"2026년 육아휴직 급여 상한과 하한은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"일반 육아휴직은 시작일부터 3개월까지 월 통상임금의 100%(상한 250만 원), 4~6개월째 100%(상한 200만 원), 7개월째부터 80%(상한 160만 원)입니다. 하한은 모든 구간에서 월 70만 원입니다. 근거는 고용보험법 시행령 제95조 제1항이며, 시행 2026.9.18. 대통령령 제36588호 기준입니다."}},
+{"@type":"Question","name":"6+6 부모함께 육아휴직 급여는 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"같은 자녀에 대해 자녀의 출생 후 18개월이 될 때까지 피보험자인 부모가 모두 육아휴직을 하면, 기간이 겹치지 않아도 각 부모의 첫 6개월은 월 통상임금의 100%입니다. 상한은 공통으로 사용한 기간에 따라 1·2개월째 250만 원, 3개월째 300만 원, 4개월째 350만 원, 5개월째 400만 원, 6개월째 450만 원이고, 하한은 부모 각각 70만 원입니다. 7개월째부터는 일반 급여(80%, 상한 160만 원)입니다. 근거는 시행령 제95조의3 제1항입니다."}},
+{"@type":"Question","name":"육아휴직 급여 사후지급은 폐지됐나요?","acceptedAnswer":{"@type":"Answer","text":"네. 시행령 제95조 제4항이 2024.12.24. 삭제되어, 2025.1.1. 이후 사용한 육아휴직 기간의 급여는 복직 후 6개월 근무를 조건으로 25%를 남겨 두지 않고 전액 지급합니다. 2025.1.1. 전의 사용 기간분은 종전 규정이 적용될 수 있습니다."}},
+{"@type":"Question","name":"2027년 육아휴직 급여 상한은 바뀌나요?","acceptedAnswer":{"@type":"Answer","text":"확인일(2026-11-15) 현재 2027년용 상한·비율 개정 시행령은 찾지 못했습니다. 이 계산기는 현행 시행령 금액을 쓰고, 2027년 변경은 미확정이라고 표시합니다. 개정이 확인되면 갱신합니다."}}
+]}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<h1>육아휴직 급여 계산기 (2026)</h1>
+<p class="lead">월 통상임금과 휴직 기간을 넣으면 일반, 6+6 부모함께 육아휴직, 한부모 특례의 월별 급여와 총액을 계산해요. <b>참고용</b>이며, 실제 지급액과 수급 여부는 고용센터 심사 결과에 따라 달라요.</p>
+</header>
+
+<section class="card">
+<div class="stats">
+<div class="stat"><b>250만 원</b><span>1~3개월 상한 (100%)</span></div>
+<div class="stat"><b>200만 원</b><span>4~6개월 상한 (100%)</span></div>
+<div class="stat"><b>160만 원</b><span>7개월째부터 상한 (80%)</span></div>
+<div class="stat"><b>70만 원</b><span>모든 구간 하한</span></div>
+</div>
+</section>
+
+<section class="card">
+<p class="note" style="margin:0"><b>2025년 1월 1일 이후 사용 기간은 사후지급이 없어요.</b> 시행령 제95조 제4항이 삭제되어, 그 기간의 급여는 휴직 중에 전액 지급돼요. 숫자는 현행 시행령([시행 2026.9.18.] 대통령령 제36588호) 기준이에요. <b>2027년 상한·비율 개정은 확인일(2026-11-15) 현재 찾지 못해, 미확정으로 두고 현행 금액을 씁니다.</b></p>
+</section>
+
+<section class="card">
+<h2>내 조건으로 계산</h2>
+<p class="note">처음 값은 설명을 위한 예제예요. 월 통상임금 300만 원으로 2026.3.1.~2027.2.28. 12개월을 일반 급여로 계산해요. 실제 임금·날짜로 바꿔 넣으세요.</p>
+<div class="row" style="margin:8px 0 12px">
+<button type="button" class="btn ghost" id="loadGeneral">일반 12개월, 300만 원</button>
+<button type="button" class="btn ghost" id="loadPlus6">6+6 12개월, 500만 원</button>
+<button type="button" class="btn ghost" id="loadFloor">하한 예제, 60만 원</button>
+</div>
+<div class="two">
+<div>
+<label class="f" for="ordinary">월 통상임금 (세전, 원)</label>
+<input id="ordinary" type="number" inputmode="numeric" min="0" step="10000" value="3000000">
+<p class="note" style="margin:6px 0 0">육아휴직 <b>시작일</b> 기준 월 통상임금이에요. 세전 금액입니다(고용노동부 빠른상담).</p>
+</div>
+<div>
+<label class="f" for="mode">적용 제도</label>
+<select id="mode">
+<option value="general" selected>일반 육아휴직 급여</option>
+<option value="plus6">6+6 부모함께 육아휴직</option>
+<option value="single">한부모 근로자 특례</option>
+</select>
+</div>
+</div>
+<div class="two">
+<div>
+<label class="f" for="start">휴직 시작일</label>
+<input id="start" type="date" required>
+</div>
+<div>
+<label class="f" for="end">휴직 종료일 (마지막 날)</label>
+<input id="end" type="date" required>
+<p class="note" style="margin:6px 0 0">종료일은 마지막 휴직일을 포함해요. 기간은 민법 제160조에 따라 달력 월로 세요. 예: 2026.4.5.부터 1개월은 2026.5.4.까지예요.</p>
+</div>
+</div>
+<div class="two">
+<div>
+<label class="f" for="alreadyMonths">이미 사용한 완전한 개월 수</label>
+<input id="alreadyMonths" type="number" inputmode="numeric" min="0" max="18" step="1" value="0">
+<p class="note" style="margin:6px 0 0">같은 자녀로 나눠 쓴 이전 휴직이 있으면, 이미 채운 완전한 개월 수를 넣어요. 지급 구간(1~3개월, 4~6개월 등)을 이어서 계산해요(제95조 제2항).</p>
+</div>
+<div>
+<label class="f" for="employerPay">휴직 중 사업주 지급액 (월, 원, 선택)</label>
+<input id="employerPay" type="number" inputmode="numeric" min="0" step="10000" value="0">
+<p class="note" style="margin:6px 0 0">육아휴직을 이유로 회사에서 받는 금품이에요. 급여와 합쳐 월 통상임금을 넘으면 초과분을 빼요(제98조).</p>
+</div>
+</div>
+<div id="plus6Wrap">
+<div class="two">
+<div>
+<label class="f" for="commonMonths">배우자와 공통으로 사용한 완전한 개월 수</label>
+<input id="commonMonths" type="number" inputmode="numeric" min="0" max="6" step="1" value="6">
+<p class="note" style="margin:6px 0 0">두 사람이 각각 사용한 기간 가운데 겹치는 길이가 아니라, <b>둘 다 사용한 개월 수</b>예요. 동시에 쓰지 않아도 됩니다(제95조의3 제1항). 최대 6개월.</p>
+</div>
+<div>
+<label class="f" for="commonExtraDays">공통 기간의 남은 일수 (선택)</label>
+<input id="commonExtraDays" type="number" inputmode="numeric" min="0" max="31" step="1" value="0">
+<p class="note" style="margin:6px 0 0">조문은 완전한 개월만 열거해요. 공통 기간에 남은 일수가 있으면, 그다음 달 특례 상한을 그 일수만큼만 일할로 적용하고, 이 해석을 결과에 밝혀 둡니다.</p>
+</div>
+</div>
+</div>
+<div class="two">
+<div>
+<label class="f" for="insured">시작일 이전 피보험 단위기간</label>
+<select id="insured">
+<option value="enough" selected>180일 이상</option>
+<option value="short">180일 미만</option>
+<option value="unknown">잘 모름</option>
+</select>
+<p class="note" style="margin:6px 0 0">이 선택은 금액을 바꾸지 않아요. 시작일 이전 단위기간 180일 미만이면 급여 대상이 아닐 수 있어요(법 제70조).</p>
+</div>
+<div>
+<label class="f" for="extend18">18개월까지 쓰는 사유</label>
+<select id="extend18">
+<option value="no" selected>해당 없음 (기본 12개월)</option>
+<option value="yes">부모 각각 3개월 이상, 한부모, 또는 중증 장애 아동 부모</option>
+</select>
+<p class="note" style="margin:6px 0 0">기본 기간은 12개월(365일이 아니라 달력 12개월)이에요. 2025.2.23.부터 위 사유가 있으면 1년 6개월까지 쓸 수 있어요. 이 계산기는 그 자격을 심사하지 않아요.</p>
+</div>
+</div>
+<div id="out" class="result" style="margin-top:14px"></div>
+</section>
+
+<section class="card">
+<h2>이 계산기가 쓰는 산식</h2>
+<table>
+<thead><tr><th>항목</th><th>내용</th></tr></thead>
+<tbody>
+<tr><td>월 통상임금</td><td>육아휴직 시작일 기준 세전 월 통상임금</td></tr>
+<tr><td>기간 계산</td><td>민법 제160조. 시작일부터 n개월은 해당일의 전날까지, 해당일이 없으면 그 달 말일까지. 2026.4.5.~2026.5.5.는 1개월 1일(고용노동부 1350, 답변일 2026.04.20)</td></tr>
+<tr><td>1개월 미만</td><td>월별 지급액 × (휴직 일수 ÷ 그 기간이 속한 1개월의 일수). 시행령 제95조 제3항, 여성고용정책과-326(2020.1.16.)</td></tr>
+<tr><td>12개월 한도 산정</td><td>남은 일수 ÷ 그 1개월의 일수. 반올림 없이 소수점 셋째 자리까지(여성고용정책과-326)</td></tr>
+<tr><td>일반 급여</td><td>1~3개월 100%·상한 250만 원, 4~6개월 100%·상한 200만 원, 7개월째부터 80%·상한 160만 원, 하한 70만 원(제95조 제1항)</td></tr>
+<tr><td>6+6 특례</td><td>생후 18개월 이내 같은 자녀에 대해 부모가 모두 휴직(기간이 겹치지 않아도 됨). 공통 사용 기간만큼 각 부모 첫 6개월 100%, 상한 250·250·300·350·400·450만 원, 하한 각 70만 원. 7개월째부터는 일반 급여(제95조의3 제1항)</td></tr>
+<tr><td>한부모 특례</td><td>한부모가족지원법 제4조 제1호의 모 또는 부. 1~3개월 100%·상한 300만 원, 이후는 일반과 같음(제95조의3 제3항)</td></tr>
+<tr><td>사후지급</td><td>제95조 제4항 삭제. 2025.1.1. 이후 사용 기간은 전액 지급. 그 전 기간분은 이 계산기에 넣지 않음</td></tr>
+<tr><td>사업주 금품</td><td>금품과 급여의 합이 월 통상임금을 넘으면 초과분을 급여에서 뺌(제98조). 1개월 미만은 같은 일수 비율로 견주고, 그 해석을 결과에 밝힘</td></tr>
+<tr><td>원 단위</td><td>법령 본문에서 원 미만 처리를 확인하지 못해, 계산값은 그대로 보여 줘요. 지급액은 원 단위로 달라질 수 있어요</td></tr>
+</tbody>
+</table>
+<p class="note">육아기 근로시간 단축 급여, 예술인·노무제공자·공무원 별도 규정, 주 단위 단기 휴직의 세부 실무 처리, 아직 법령이 아닌 2027 개편안은 넣지 않았어요.</p>
+</section>
+
+<section class="card">
+<h2>일반 육아휴직 급여 (2025.1.1. 이후, 현행)</h2>
+<table>
+<thead><tr><th>구간</th><th>비율</th><th>월 상한</th><th>월 하한</th></tr></thead>
+<tbody>
+<tr><td>1~3개월</td><td>통상임금 100%</td><td>250만 원</td><td>70만 원</td></tr>
+<tr><td>4~6개월</td><td>통상임금 100%</td><td>200만 원</td><td>70만 원</td></tr>
+<tr><td>7개월째부터</td><td>통상임금 80%</td><td>160만 원</td><td>70만 원</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="card">
+<h2>6+6 부모함께 육아휴직 — 첫 6개월 상한</h2>
+<table>
+<thead><tr><th>공통 사용</th><th>1개월째</th><th>2개월째</th><th>3개월째</th><th>4개월째</th><th>5개월째</th><th>6개월째</th></tr></thead>
+<tbody>
+<tr><td>각각 1개월</td><td>250만 원</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>각각 2개월</td><td>250만 원</td><td>250만 원</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>각각 3개월</td><td>250만 원</td><td>250만 원</td><td>300만 원</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>각각 4개월</td><td>250만 원</td><td>250만 원</td><td>300만 원</td><td>350만 원</td><td>—</td><td>—</td></tr>
+<tr><td>각각 5개월</td><td>250만 원</td><td>250만 원</td><td>300만 원</td><td>350만 원</td><td>400만 원</td><td>—</td></tr>
+<tr><td>각각 6개월</td><td>250만 원</td><td>250만 원</td><td>300만 원</td><td>350만 원</td><td>400만 원</td><td>450만 원</td></tr>
+</tbody>
+</table>
+<p class="note">비율은 모두 시작일 기준 월 통상임금의 100%이고, 하한은 부모 각각 70만 원이에요. 7개월째부터는 일반 급여예요. 한부모 특례의 1~3개월 상한은 300만 원이에요.</p>
+</section>
+
+<section class="card faq">
+<h2>자주 묻는 질문</h2>
+<details open>
+<summary>이 금액이 실제 육아휴직 급여와 다를 수 있나요?</summary>
+<p>있어요. 이 계산기는 참고용이에요. 통상임금 산정, 분할 사용의 합산, 6+6 공통 기간 인정, 사업주 금품, 수급 자격(단위기간 180일, 30일 이상 휴직)은 고용센터가 심사합니다. 정확한 금액은 고용24 육아휴직급여 계산기와 관할 고용센터(고용노동부 상담 1350) 확인이 우선이에요.</p>
+</details>
+<details>
+<summary>사후지급 25%는 언제부터 없나요?</summary>
+<p>2025년 1월 1일 이후 사용한 기간부터예요. 대통령령 제35100호가 시행령 제95조 제4항을 삭제했고, 고용노동부도 그날부터 전액 지급이라고 안내했어요. 2025년 1월 1일 전 사용 기간분은 종전 규정(휴직 중 75%, 복직 후 6개월 근무 시 나머지)이 적용될 수 있어, 이 계산기는 그 기간의 금액을 지어내지 않아요.</p>
+</details>
+<details>
+<summary>6+6은 부부가 같은 달에 쉬어야 하나요?</summary>
+<p>아니요. 같은 자녀에 대해 생후 18개월이 될 때까지 부모 모두 육아휴직을 하면 되고, 기간이 전부 또는 일부 겹치지 않아도 됩니다(제95조의3 제1항). 공통으로 사용한 기간만큼 각 부모의 첫 6개월 상한이 올라가요. 임신 중 휴직도 태아를 자녀로 봅니다(같은 조 제2항). 먼저 휴직한 사람은 일반 급여를 받다가, 배우자가 신청할 때 차액을 추가로 받는 식으로 운영된다고 고용노동부가 안내하고 있어요.</p>
+</details>
+<details>
+<summary>1개월이 안 되는 달은 어떻게 계산하나요?</summary>
+<p>월별 지급액을 그 달이 속한 1개월의 일수로 나눠, 휴직한 일수만큼 비례해 지급해요(제95조 제3항). 고용노동부 1350 상담(답변일 2026.04.20) 예제는 2026.4.5.~5.5.를 1개월 1일로 보고, 남은 1일은 다음 1개월(5.5.~6.4., 31일)의 1/31로 계산하는 방식과 같아요. 12개월 한도를 셀 때는 같은 비율을 반올림 없이 소수점 셋째 자리까지 씁니다(여성고용정책과-326, 2020.1.16.).</p>
+</details>
+<details>
+<summary>2027년에 휴직하면 금액이 바뀌나요?</summary>
+<p>확인일(2026-11-15) 현재 2027년용 상한·비율 개정 시행령은 찾지 못했어요. 이 계산기는 2027년 날짜에도 현행 금액을 적용하고, 미확정이라고 밝혀 둡니다. 개정이 확인되면 결과를 갱신합니다.</p>
+</details>
+</section>
+
+<footer class="foot">
+<p><b>출처</b> (확인일 2026-11-15):
+<a href="https://www.law.go.kr/법령/고용보험법" target="_blank" rel="noopener">고용보험법 제70조(육아휴직 급여)·제73조</a> ·
+<a href="https://www.law.go.kr/법령/고용보험법시행령/제95조" target="_blank" rel="noopener">고용보험법 시행령 제95조(육아휴직 급여, 제4항 삭제)·제95조의3(18개월 이내 자녀 특례)·제98조(감액), [시행 2026.9.18.] 대통령령 제36588호</a> ·
+<a href="https://www.law.go.kr/LSW/lsRvsRsnListP.do?chrClsCd=010202&amp;lsId=002237&amp;lsRvsGubun=all" target="_blank" rel="noopener">대통령령 제35100호 개정이유(급여 인상·사후지급 폐지, 2025.1.1. 시행)</a> ·
+<a href="https://www.work24.go.kr/cm/c/f/1100/selecSystInfo.do?systId=SI00000402" target="_blank" rel="noopener">고용24 육아휴직급여 제도안내(일반·6+6·한부모)</a> ·
+<a href="https://1350.moel.go.kr/rtmview.do?id=1000296859" target="_blank" rel="noopener">고용노동부 1350 상담(기간은 민법 제160조, 1개월 미만 일할, 답변일 2026.04.20 등)</a> ·
+<a href="https://www.moel.go.kr/minwon/fastcounsel/fastcounselView.do?inetDcssMngId=202501020115136950068" target="_blank" rel="noopener">고용노동부 빠른상담(2025.1.1.부터 사후지급 없이 전액, 답변일 2025.01.02)</a>
+</p>
+<p><b>안내</b>: 참고용 계산기예요. 숫자를 지어내지 않았어요. 공식 모의계산은 고용24 육아휴직급여 계산기에서 확인할 수 있어요. 마지막 확인 2026-11-15.</p>
+<p>AI 도움을 받아 만들었어요 · <a href="../">Send This Instead 무료 도구 모음</a> · <a href="../severance-pay/">퇴직금 계산기</a> · <a href="../unemployment-benefit/">실업급여 계산기</a></p>
+<img class="px" src="https://hits.sh/gym-maker.github.io/parental-leave-pay.svg" alt="" aria-hidden="true">
+</footer>
+</div>
+<script src="parental_leave.js"></script>
+<script>
+function $(i){return document.getElementById(i)}
+function won(n){
+  if(n==null||!isFinite(n)) return '—';
+  if(Math.abs(n-Math.round(n))<1e-9) return Math.round(n).toLocaleString('ko-KR')+'원';
+  return Number(n).toLocaleString('ko-KR',{minimumFractionDigits:2,maximumFractionDigits:4})+'원';
+}
+function fmtDate(o){return o?P.ymd(o).replace(/-/g,'. '):''}
+function pct(r){return (r*100).toFixed(0)+'%'}
+var P=window.ParentalLeave;
+function togglePlus6(){
+  $('plus6Wrap').hidden=$('mode').value!=='plus6';
+}
+function loadExample(kind){
+  if(kind==='general'){
+    $('ordinary').value='3000000';
+    $('mode').value='general';
+    $('start').value='2026-03-01';
+    $('end').value='2027-02-28';
+    $('alreadyMonths').value='0';
+    $('employerPay').value='0';
+    $('commonMonths').value='6';
+    $('commonExtraDays').value='0';
+    $('insured').value='enough';
+    $('extend18').value='no';
+  }else if(kind==='plus6'){
+    $('ordinary').value='5000000';
+    $('mode').value='plus6';
+    $('start').value='2026-03-01';
+    $('end').value='2027-02-28';
+    $('alreadyMonths').value='0';
+    $('employerPay').value='0';
+    $('commonMonths').value='6';
+    $('commonExtraDays').value='0';
+    $('insured').value='enough';
+    $('extend18').value='yes';
+  }else{
+    $('ordinary').value='600000';
+    $('mode').value='general';
+    $('start').value='2026-03-01';
+    $('end').value='2027-02-28';
+    $('alreadyMonths').value='0';
+    $('employerPay').value='0';
+    $('commonMonths').value='6';
+    $('commonExtraDays').value='0';
+    $('insured').value='enough';
+    $('extend18').value='no';
+  }
+  togglePlus6();
+  render();
+}
+function inputs(){
+  return {
+    ordinary:$('ordinary').value===''?null:+$('ordinary').value,
+    start:P.parseYMD($('start').value),
+    end:P.parseYMD($('end').value),
+    mode:$('mode').value,
+    alreadyMonths:+$('alreadyMonths').value||0,
+    commonMonths:+$('commonMonths').value||0,
+    commonExtraDays:+$('commonExtraDays').value||0,
+    employerPay:+$('employerPay').value||0,
+    extend18:$('extend18').value==='yes',
+    insured:$('insured').value
+  };
+}
+function kindLabel(k){
+  if(k==='plus6'||k==='plus6-partial') return '6+6 특례';
+  if(k==='single') return '한부모 특례';
+  if(k==='general-after-plus6') return '일반 (공통 기간 이후)';
+  return '일반';
+}
+function render(){
+  togglePlus6();
+  var box=$('out');
+  var p=inputs();
+  if(p.ordinary==null||!p.start||!p.end){
+    box.innerHTML='<p class="note">월 통상임금과 휴직 시작일·종료일을 넣어 주세요.</p>';
+    return;
+  }
+  var r=P.calc(p);
+  if(r.err){
+    var msg={
+      'wage-required':'월 통상임금을 확인해 주세요.',
+      'dates-required':'휴직 시작일과 종료일을 넣어 주세요.',
+      'dates-order':'종료일은 시작일 당일 또는 그 이후여야 해요.',
+      'already-range':'이미 사용한 개월 수를 0~18 사이로 넣어 주세요.',
+      'common-range':'공통 사용 기간을 확인해 주세요. 완전한 개월은 0~6이에요.'
+    };
+    box.innerHTML='<p class="note">'+(msg[r.err]||'입력값을 확인해 주세요.')+'</p>';
+    return;
+  }
+  var elig=[];
+  if(p.insured==='short'){
+    elig.push('<p class="bad">시작일 이전 피보험 단위기간이 180일 미만이면 육아휴직 급여 대상이 아닐 수 있어요(법 제70조). 아래 금액은 산식 참고용이에요.</p>');
+  }else if(p.insured==='enough'){
+    elig.push('<p class="ok">피보험 단위기간 180일 이상 조건은 충족하는 것으로 입력했어요. 30일 이상 휴직, 사업주 확인서 등 다른 요건은 고용센터가 심사합니다.</p>');
+  }
+  if(!r.eligible30){
+    elig.push('<p class="bad">이번 휴직만 보면 30일 미만이에요. 나눠 쓴 기간을 합쳐 30일 이상이 아니면 지급 대상이 아니에요(법 제70조). 아래 금액은 일할 산식 참고용이에요.</p>');
+  }
+  if(r.before2025){
+    elig.push('<p class="bad">시작일이 2025년 1월 1일 이전이에요. 그 전 사용 기간분은 사후지급 종전 규정이 적용될 수 있어, 이 계산기는 그 금액을 지어내지 않아요. 2025년 1월 1일 이후 기간의 숫자만 현행 전액 기준으로 참고하세요.</p>');
+  }
+  if(r.over18){
+    elig.push('<p class="bad">합산 사용 기간이 18개월을 넘어요. 법정 육아휴직 한도를 넘는 구간은 지급되지 않을 수 있어요.</p>');
+  }else if(r.over12 && !p.extend18){
+    elig.push('<p class="note">합산 사용 기간이 12개월을 넘어요. 부모 각각 3개월 이상, 한부모, 중증 장애 아동 부모 등 연장 사유가 인정되지 않으면 12개월을 넘는 달은 대상이 아닐 수 있어요. 아래는 산식 참고용이에요.</p>');
+  }
+  if(r.start.y>=2027 || r.end.y>=2027){
+    elig.push('<p class="note">휴직 기간에 2027년이 들어 있어요. 2027년 상한·비율 개정은 확인일 현재 찾지 못해, 현행 시행령 금액으로 계산했고 미확정입니다.</p>');
+  }
+  var table='<h3>월별 내역</h3><table><thead><tr><th>구간</th><th>기간</th><th>비율·상한</th><th>월별 지급액</th><th>이번 달 지급</th></tr></thead><tbody>';
+  r.rows.forEach(function(row){
+    var span=fmtDate(row.start)+' ~ '+fmtDate(row.end);
+    if(!row.complete) span+=' ('+row.leaveDays+'/'+row.fullDays+'일)';
+    var rule=pct(row.rate)+' · 상한 '+won(row.cap);
+    var tags=' <span class="tag">'+kindLabel(row.kind)+'</span>';
+    if(row.floored) tags+=' <span class="tag">하한 70만 원</span>';
+    var monthPay=won(row.monthlyAmount);
+    var pay=won(row.amount);
+    if(row.reduction>0) pay+=' <span class="note">(감액 '+won(row.reduction)+')</span>';
+    table+='<tr><td>'+row.monthIndex+'개월째'+tags+'</td><td>'+span+'</td><td>'+rule+'</td><td>'+monthPay+'</td><td>'+pay+'</td></tr>';
+  });
+  table+='</tbody></table>';
+  box.innerHTML=
+    elig.join('')+
+    '<div class="stats">'+
+    '<div class="stat"><b>'+r.rows.length+'구간</b><span>이번 휴직 '+r.calendarDays+'일</span></div>'+
+    '<div class="stat"><b>'+r.usedThisLeave.toLocaleString('ko-KR',{maximumFractionDigits:3})+'개월</b><span>이번 휴직 사용(한도 산정)</span></div>'+
+    '<div class="stat"><b>'+r.usedMonths.toLocaleString('ko-KR',{maximumFractionDigits:3})+'개월</b><span>이전 사용 포함 합산</span></div>'+
+    '<div class="stat"><b class="big">'+won(r.total)+'</b><span>예상 총액 (전액 지급)</span></div>'+
+    '</div>'+
+    '<p class="note">2025.1.1. 이후 사용 기간은 사후지급 없이 전액을 휴직 중에 받아요. 원 미만 처리는 법령에서 확인하지 못해 계산값을 그대로 적었어요.</p>'+
+    table;
+}
+['ordinary','mode','start','end','alreadyMonths','employerPay','commonMonths','commonExtraDays','insured','extend18'].forEach(function(i){
+  $(i).addEventListener('input',render);
+  $(i).addEventListener('change',render);
+});
+$('loadGeneral').addEventListener('click',function(){ loadExample('general'); });
+$('loadPlus6').addEventListener('click',function(){ loadExample('plus6'); });
+$('loadFloor').addEventListener('click',function(){ loadExample('floor'); });
+if(!$('start').value) loadExample('general');
+else { togglePlus6(); render(); }
+</script>
+</body>
+</html>
