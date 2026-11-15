@@ -29,6 +29,8 @@ label.f{display:block;font-weight:600;margin:10px 0 4px}input[type=number],input
 .ok{color:var(--pine);font-weight:700}.bad{color:var(--red);font-weight:700}
 details{border-bottom:1px solid var(--line);padding:10px 0}summary{cursor:pointer;font-weight:600}
 footer.foot{font-size:.82rem;color:var(--mute);padding:20px 0 40px;border-top:1px solid var(--line);margin-top:24px}
+.tool-cta{margin-top:10px}.tool-cta a{font-weight:600}
+@media print{.tool-cta{display:none!important}}
 a{color:var(--pine)}.tag{display:inline-block;font-size:.75rem;background:var(--pine-soft);color:var(--pine);border-radius:999px;padding:2px 8px;margin-left:4px}
 .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.82rem;color:var(--mute)}.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:4px}
 .px{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}

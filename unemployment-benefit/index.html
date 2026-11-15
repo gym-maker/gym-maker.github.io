@@ -228,11 +228,13 @@
 </p>
 <p><b>안내</b>: 참고용 계산기예요. 숫자를 지어내지 않았어요. 고용24 구직급여액 안내 페이지의 상·하한 금액은 2026년 개정(상한 68,100원)이 아직 반영되지 않은 것으로 보여, 금액은 법령과 1350 상담을 따랐어요. 공식 모의계산은 고용24 홈페이지 &gt; 정책/제도 &gt; 지원금 모의계산에서 확인할 수 있어요. 마지막 확인 2026-11-15.</p>
 <p>AI 도움을 받아 만들었어요 · <a href="../">Send This Instead 무료 도구 모음</a> · <a href="../severance-pay/">퇴직금 계산기</a> · <a href="../2027-take-home-pay/">2027 연봉 실수령액 계산기</a></p>
+<p class="note noprint tool-cta">영어로 업무 메일을 쓸 때 참고할 수 있는 무료 샘플 5편이 있어요. <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=unemployment-benefit" target="_blank" rel="noopener">Send This Instead 무료 샘플</a></p>
 <img class="px" src="https://hits.sh/gym-maker.github.io/unemployment-benefit.svg" alt="" aria-hidden="true">
 </footer>
 </div>
 <script src="unemployment.js"></script>
 <script>
+var SAMPLE_CTA='<p class="note noprint tool-cta">영어로 업무 메일을 쓸 때 참고할 수 있는 무료 샘플 5편이 있어요. <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=unemployment-benefit" target="_blank" rel="noopener">Send This Instead 무료 샘플</a></p>';
 function $(i){return document.getElementById(i)}
 function won(n){
   if(n==null||!isFinite(n)) return '—';
@@ -354,7 +356,7 @@ function render(){
     '<tr><td>30일 환산 (참고)</td><td>'+won(r.monthly30)+'</td></tr>'+
     '<tr><th>예상 총액</th><th>'+won(r.total)+'</th></tr>'+
     '</tbody></table>'+
-    '<p class="note">수급 기간 중 재취업 활동 인정, 대기기간, 연장급여는 반영하지 않았어요. 총액은 소정급여일수를 모두 받는다고 가정한 값입니다.</p>';
+    '<p class="note">수급 기간 중 재취업 활동 인정, 대기기간, 연장급여는 반영하지 않았어요. 총액은 소정급여일수를 모두 받는다고 가정한 값입니다.</p>'+SAMPLE_CTA;
 }
 ['leave','birth','insuredYears','insuredMonths','hours','disabled','wageMode','monthlyWage','threeMonthWage','dailyAvg','periodDays','dailyOrdinary','insuredUnits','reason'].forEach(function(i){
   $(i).addEventListener('input',render);

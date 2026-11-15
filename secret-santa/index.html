@@ -122,7 +122,8 @@ body.mode-reveal #revealView{display:block}
   <button type="button" class="btn ghost" id="tAgain" onclick="resetDraw()">Draw again</button>
 </div>
 <p class="note" id="tListWarn" style="margin-top:10px">“Copy the full list” reveals every assignment. Only use it if you are sending the names yourself, or if secrecy does not matter.</p>
-<p class="note" id="tEmail" style="margin-top:8px">Need the gift-exchange invite email? There is a short template in the <a href="https://3368936654923.gumroad.com/l/uctkrr?utm_source=tools" target="_blank" rel="noopener">Holiday email pack</a>.</p>
+<p class="note tool-cta" id="tSample" style="margin-top:8px">If you write work emails in English, there is a free 5-template sample you can download: <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=secret-santa" target="_blank" rel="noopener">Send This Instead — free sample</a></p>
+<p class="note" id="tEmail" style="margin-top:8px">Need the gift-exchange invite email? There is a short template in the <a href="https://3368936654923.gumroad.com/l/uctkrr?utm_source=tools&amp;utm_campaign=secret-santa" target="_blank" rel="noopener">Holiday email pack</a>.</p>
 <h3 id="tCardsH" style="margin-top:18px">Foldable cards</h3>
 <p class="note" id="tCardsN">Fold each card at the dashed line so the recipient’s name stays inside. Print, then cut or fold the pages in half.</p>
 <div class="cards-preview" id="cardsPreview"></div>
@@ -164,6 +165,7 @@ body.mode-reveal #revealView{display:block}
 
 <footer class="foot">
 <p id="tFoot1">Made with AI help by Send This Instead · <a href="../">More free tools</a></p>
+<p class="tool-cta" id="tFootCta">If you write work emails in English, there is a free 5-template sample you can download: <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&amp;utm_campaign=secret-santa" target="_blank" rel="noopener">Send This Instead — free sample</a></p>
 <p id="tFoot2">The draw never leaves your browser. Reveal links are lightly obfuscated, not encrypted.</p>
 <img class="px" src="https://hits.sh/gym-maker.github.io/secret-santa.svg" alt="" aria-hidden="true">
 </footer>
@@ -185,7 +187,9 @@ var I18N = {
     tColWho: 'Who', tColLink: 'Private reveal link',
     tCopyAll: 'Copy all links', tCopyList: 'Copy the full list', tPrint: 'Print cards', tAgain: 'Draw again',
     tListWarn: '“Copy the full list” reveals every assignment. Only use it if you are sending the names yourself, or if secrecy does not matter.',
-    tEmail: 'Need the gift-exchange invite email? There is a short template in the <a href="https://3368936654923.gumroad.com/l/uctkrr?utm_source=tools" target="_blank" rel="noopener">Holiday email pack</a>.',
+    tEmail: 'Need the gift-exchange invite email? There is a short template in the <a href="https://3368936654923.gumroad.com/l/uctkrr?utm_source=tools&utm_campaign=secret-santa" target="_blank" rel="noopener">Holiday email pack</a>.',
+    tSample: 'If you write work emails in English, there is a free 5-template sample you can download: <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&utm_campaign=secret-santa" target="_blank" rel="noopener">Send This Instead — free sample</a>',
+    tFootCta: 'If you write work emails in English, there is a free 5-template sample you can download: <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&utm_campaign=secret-santa" target="_blank" rel="noopener">Send This Instead — free sample</a>',
     tCardsH: 'Foldable cards',
     tCardsN: 'Fold each card at the dashed line so the recipient’s name stays inside. Print, then cut or fold the pages in half.',
     tFaqH: 'FAQ',
@@ -231,7 +235,9 @@ var I18N = {
     tColWho: '누구', tColLink: '개인 확인 링크',
     tCopyAll: '링크 모두 복사', tCopyList: '전체 명단 복사', tPrint: '카드 인쇄', tAgain: '다시 뽑기',
     tListWarn: '“전체 명단 복사”는 모든 배정을 보여 줘요. 직접 나눠 줄 때, 또는 비밀이 상관없을 때만 쓰세요.',
-    tEmail: '선물 교환 모임 초대 메일이 필요하면, <a href="https://3368936654923.gumroad.com/l/uctkrr?utm_source=tools" target="_blank" rel="noopener">Holiday 이메일 팩</a>에 짧은 템플릿이 있어요.',
+    tEmail: '선물 교환 모임 초대 메일이 필요하면, <a href="https://3368936654923.gumroad.com/l/uctkrr?utm_source=tools&utm_campaign=secret-santa" target="_blank" rel="noopener">Holiday 이메일 팩</a>에 짧은 템플릿이 있어요.',
+    tSample: '영어로 업무 메일을 쓸 때 참고할 수 있는 무료 샘플 5편이 있어요. <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&utm_campaign=secret-santa" target="_blank" rel="noopener">Send This Instead 무료 샘플</a>',
+    tFootCta: '영어로 업무 메일을 쓸 때 참고할 수 있는 무료 샘플 5편이 있어요. <a href="https://3368936654923.gumroad.com/l/pjgcqqj?utm_source=tools&utm_campaign=secret-santa" target="_blank" rel="noopener">Send This Instead 무료 샘플</a>',
     tCardsH: '접는 카드',
     tCardsN: '점선에서 접어서 상대 이름이 안에 들어가게 하세요. 인쇄한 뒤 반으로 접거나 잘라 쓰면 돼요.',
     tFaqH: '자주 묻는 질문',
@@ -295,6 +301,8 @@ function setLang(next){
   $('tPrint').textContent = t.tPrint;
   $('tAgain').textContent = t.tAgain;
   $('tFoot1').innerHTML = t.tFoot1;
+  $('tFootCta').innerHTML = t.tFootCta;
+  $('tSample').innerHTML = t.tSample;
   $('tEmail').innerHTML = t.tEmail;
   $('tReady').textContent = lastDraw ? t.readyN(lastDraw.pairs.length) : t.tReady;
   if (lastDraw) renderResults(lastDraw);
